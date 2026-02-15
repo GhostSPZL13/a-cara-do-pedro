@@ -1,336 +1,81 @@
-/* ============================================
-   /* A CARA DO PEDRO - CSS MODERNO 2026 */
-   ============================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    --primary: #0d47a1;
-    --secondary: #ff6f00;
-    --dark: #1a1a1a;
-    --light: #f5f5f5;
-    --text: #333;
-    --white: #fff;
-}
-
-body {body {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-/* ============================================
-   HEADER & NAVEGAÇÃO
-   ============================================ */
-
-header {
-    background: linear-gradient(135deg, var(--primary) 0%, #1565c0 100%);
-    color: var(--white);
-    padding: 40px 20px;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-header p {
-    font-size: 1.1rem;
-    opacity: 0.95;
-    margin-bottom: 25px;
-    font-weight: 300;
-}
-
-nav {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-nav a {
-    color: var(--white);
-    text-decoration: none;
-    padding: 10px 20px;
-    font-weight: 600;
-    position: relative;
-    transition: all 0.3s ease;
-    border-radius: 4px;
-}
-
-nav a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-nav a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--secondary);
-    transition: width 0.3s ease;
-}
-
-nav a:hover::after {
-    width: 100%;
-}
-
-/* ============================================
-   SEÇÕES GERAIS
-   ============================================ */
-
-section {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    scroll-behavior: smooth;
-}
-
-section:nth-child(even) {
-    background: var(--white);
-}
-
-h2 {
-    font-size: 2rem;
-    color: var(--primary);
-    margin-bottom: 30px;
-    border-left: 5px solid var(--secondary);
-    padding-left: 15px;
-    font-weight: 700;
-    position: relative;
-}
-
-h3 {
-    font-size: 1.4rem;
-    color: var(--primary);
-    margin-top: 25px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-p {
-    font-size: 1rem;
-    color: var(--text);
-    margin-bottom: 15px;
-    text-align: justify;
-    line-height: 1.8;
-}
-
-/* ============================================
-   LISTA DE SERVIÇOS
-   ============================================ */
-
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
-    padding: 18px 20px;
-    margin-bottom: 12px;
-    border-left: 5px solid var(--secondary);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-ul li:hover {
-    background: linear-gradient(135deg, var(--secondary) 0%, #ff8f00 100%);
-    color: var(--white);
-    transform: translateX(10px);
-    box-shadow: 0 4px 12px rgba(255, 111, 0, 0.3);
-}
-
-/* ============================================
-   BUSCA DE SERVIÇOS
-   ============================================ */
-
-.busca-servico {
-    background: linear-gradient(135deg, #f0f4ff 0%, #fff3e0 100%);
-    padding: 30px;
-    border-radius: 8px;
-    margin-top: 30px;
-    border: 2px solid var(--primary);
-}
-
-.busca-servico h3 {
-    margin-top: 0;
-    color: var(--primary);
-}
-
-#searchInput {
-    width: 100%;
-    padding: 15px;
-    font-size: 1rem;
-    border: 2px solid var(--primary);
-    border-radius: 6px;
-    margin: 15px 0;
-    transition: all 0.3s ease;
-    font-family: inherit;
-}
-
-#searchInput:focus {
-    outline: none;
-    border-color: var(--secondary);
-    box-shadow: 0 0 10px rgba(255, 111, 0, 0.3);
-    background: var(--white);
-}
-
-#resultadoBusca {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 6px;
-    text-align: center;
-    min-height: 30px;
-    transition: all 0.3s ease;
-}
-
-#resultadoBusca:not(:empty) {
-    background: rgba(13, 71, 161, 0.1);
-    color: var(--primary);
-}
-
-/* ============================================
-   CONTATO
-   ============================================ */
-
-.contatos a,
-#contato a {
-    color: var(--secondary);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    padding: 5px 0;
-    border-bottom: 2px solid transparent;
-}
-
-.contatos a:hover,
-#contato a:hover {
-    color: var(--primary);
-    border-bottom: 2px solid var(--secondary);
-}
-
-#contato p {
-    font-size: 1.05rem;
-    margin-bottom: 20px;
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-
-footer {
-    background: var(--dark);
-    color: var(--white);
-    text-align: center;
-    padding: 30px 20px;
-    margin-top: 40px;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
-}
-
-footer p {
-    margin: 0;
-    font-size: 0.95rem;
-    opacity: 0.9;
-    text-align: center;
-}
-
-/* ============================================
-   RESPONSIVIDADE - MOBILE
-   ============================================ */
-
-@media (max-width: 768px) {
-    header h1 {
-        font-size: 1.8rem;
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #0f0f0f;
+        color: #eaeaea;
+        scroll-behavior: smooth;
     }
 
-    header p {
-        font-size: 0.95rem;
-    }
-
-    nav {
-        gap: 5px;
+    header {
+        background: #000;
+        color: white;
+        text-align: center;
+        padding: 40px 20px;
+        border-bottom: 2px solid #00ff88;
     }
 
     nav a {
-        padding: 8px 12px;
-        font-size: 0.9rem;
+        color: #00ff88;
+        margin: 0 12px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        color: white;
     }
 
     section {
-        padding: 40px 15px;
+        padding: 60px 20px;
+        max-width: 900px;
+        margin: auto;
+        border-bottom: 1px solid #222;
     }
 
     h2 {
-        font-size: 1.6rem;
-    }
-
-    h3 {
-        font-size: 1.2rem;
-    }
-
-    p {
-        font-size: 0.95rem;
-        text-align: left;
+        border-left: 4px solid #00ff88;
+        padding-left: 12px;
+        margin-bottom: 20px;
     }
 
     ul li {
-        padding: 15px 15px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
     }
 
-    ul li:hover {
-        transform: translateX(5px);
-    }
-}
-
-@media (max-width: 480px) {
-    header {
-        padding: 25px 10px;
+    footer {
+        background: #000;
+        color: #777;
+        text-align: center;
+        padding: 25px;
     }
 
-    header h1 {
-        font-size: 1.5rem;
-    }
-
-    nav a {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-    }
-
-    section {
-        padding: 30px 10px;
-    }
-
-    h2 {
-        font-size: 1.4rem;
-        padding-left: 10px;
-    }
-
-    .busca-servico {
-        padding: 20px;
-    }
-
-    #searchInput {
+    .busca-servico input {
         padding: 12px;
-        font-size: 16px;
+        width: 100%;
+        max-width: 400px;
+        margin-top: 10px;
+        background: #1a1a1a;
+        border: 1px solid #00ff88;
+        color: white;
     }
-}
-/* Otimizado por GhostSPZL13 - 2026 */
+
+    .whatsapp-float {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #00ff88;
+        color: #000;
+        padding: 14px 18px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 4px 15px rgba(0,255,136,0.3);
+        transition: 0.3s;
+    }
+
+    .whatsapp-float:hover {
+        transform: scale(1.05);
+    }
+</style>
