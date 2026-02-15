@@ -46,8 +46,8 @@ Todo tipo de ajuda é bem-vindo, seja código, design ou ideias para impactar a 
 ## 🤝 Contato
 
 Para trocar ideias, parcerias ou sugestões:  
-- E-mail: **[seu-email-aqui]**  
-- Redes sociais: **[links das suas redes]**  
+- E-mail: Pedro.098259@gmail.com  
+- Redes sociais: Pedro.pedr00
 
 ---
 
