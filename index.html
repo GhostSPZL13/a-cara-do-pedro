@@ -6,8 +6,81 @@
     <meta name="description" content="Pedro - Soluções técnicas em tecnologia e idealizador do projeto Lar Sem Fronteiras.">
     <meta name="keywords" content="técnico em informática, manutenção de computador, Linux, Itaquaquecetuba, Lar Sem Fronteiras">
     <meta name="author" content="Pedro">
+
+    <!-- Open Graph (melhor compartilhamento) -->
+    <meta property="og:title" content="A Cara do Pedro | Tecnologia com Propósito">
+    <meta property="og:description" content="Soluções técnicas em informática, Linux e manutenção em Itaquaquecetuba. Idealizador do projeto Lar Sem Fronteiras.">
+    <meta property="og:type" content="website">
+
     <title>A Cara do Pedro | Tecnologia com Propósito</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        nav a {
+            color: #00ff88;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 40px 20px;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        h2 {
+            border-left: 4px solid #00ff88;
+            padding-left: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .busca-servico input {
+            padding: 10px;
+            width: 100%;
+            max-width: 400px;
+            margin-top: 10px;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
 </head>
 
 <body>
@@ -26,16 +99,15 @@
 </header>
 
 <section id="sobre">
-    <h2>Seja Bem-Vindo</h2>
+    <h2>Sobre</h2>
     <p>
-        É um prazer ter você aqui.
-        
-        A Cara do Pedro é uma plataforma onde eu apresento soluções técnicas, ideias estruturadas e projetos com propósito.
-        
-        Sou profissional de tecnologia com experiência em manutenção de computadores, instalação de sistemas e suporte técnico.
-        Meu compromisso é simples: entregar resultado com responsabilidade, organização e visão de futuro.
-        
-        Além da área técnica, desenvolvo iniciativas sociais que buscam gerar impacto real.
+        Seja bem-vindo.
+        A Cara do Pedro é mais do que um site — é uma vitrine de soluções reais.
+        Uno experiência prática, tecnologia e visão estratégica para resolver problemas de forma objetiva.
+    </p>
+    <p>
+        Atuo com manutenção, estruturação e otimização de computadores, sempre com foco em desempenho e organização.
+        Tecnologia funcional, atendimento direto e entrega com responsabilidade.
     </p>
 </section>
 
@@ -43,31 +115,27 @@
     <h2>Serviços</h2>
 
     <p>
-        Eu resolvo problemas. Simples assim.
-
-        Se o computador está lento, eu otimizo.
+        Eu resolvo problemas. Se o computador está lento, eu otimizo.
         Se o sistema travou, eu recupero.
-        Se precisa montar ou melhorar a máquina, eu estruturo.
-
-        Meu foco é trazer praticidade para o seu dia a dia usando tecnologia de forma inteligente.
-        Nada de complicação desnecessária — solução clara, funcional e eficiente.
+        Se precisa melhorar a máquina, eu estruturo.
+        Simples, direto e eficiente.
     </p>
 
-    <h3>O que eu faço na prática:</h3>
+    <h3>O que eu faço:</h3>
     <ul>
         <li>Formatação e recuperação de computadores</li>
-        <li>Instalação e configuração de Windows e Linux</li>
-        <li>Remoção de vírus e otimização de desempenho</li>
-        <li>Montagem e upgrade estratégico de máquinas</li>
-        <li>Limpeza técnica preventiva (hardware e software)</li>
-        <li>Configuração de redes residenciais</li>
-        <li>Criação de sites institucionais simples</li>
-        <li>Suporte técnico direto e objetivo</li>
+        <li>Instalação de Windows e Linux</li>
+        <li>Remoção de vírus</li>
+        <li>Upgrade estratégico</li>
+        <li>Limpeza técnica preventiva</li>
+        <li>Configuração de redes</li>
+        <li>Criação de sites simples</li>
+        <li>Suporte técnico direto</li>
     </ul>
 
     <div class="busca-servico">
-        <h3>🔎 Buscar Serviço</h3>
-        <input type="text" id="searchInput" placeholder="Digite o serviço que você procura..." onkeyup="buscarServico()">
+        <h3>Buscar Serviço</h3>
+        <input type="text" id="searchInput" placeholder="Digite o serviço..." onkeyup="buscarServico()">
         <p id="resultadoBusca"></p>
     </div>
 </section>
@@ -76,32 +144,39 @@
     <h2>Experiência de Campo</h2>
 
     <p>
-        Minha base profissional foi construída na prática.
-        Atuei na montagem e desmontagem de estruturas para eventos, stands e produções de grande porte.
-        Trabalhei diretamente com logística, transporte de equipamentos e execução técnica sob pressão.
+        Minha trajetória profissional foi construída na prática.
+        Atuei na montagem de estruturas para eventos, stands e produções de grande porte,
+        trabalhando com logística, organização e execução sob pressão.
     </p>
 
     <p>
-        Participei de montagens em teatros, institutos e eventos corporativos realizados em espaços de alto padrão,
-        incluindo produções no Monte Líbano Esporte Clube e stands de marcas reconhecidas como Tramontina.
+        Participei de eventos em espaços de alto padrão, incluindo o Monte Líbano Esporte Clube
+        e stands de marcas como Tramontina.
     </p>
 
     <p>
-        Fui responsável por carregar, organizar, montar e desmontar estruturas, garantindo disciplina, organização e entrega eficiente.
-        Essa experiência me ensinou que resultado vem de execução.
-
-        Hoje aplico essa mesma mentalidade na tecnologia: planejamento, organização e solução prática.
+        Essa vivência fortaleceu minha mentalidade operacional: planejamento claro,
+        organização estratégica e entrega eficiente.
+        Hoje aplico essa base na tecnologia.
     </p>
 </section>
 
 <section id="projeto">
     <h2>Projeto: Lar Sem Fronteiras</h2>
+
     <p>
-        O Lar Sem Fronteiras é uma iniciativa social voltada à terceira idade, com o objetivo de promover autonomia, dignidade e segurança.
+        O Lar Sem Fronteiras é uma iniciativa social voltada à terceira idade,
+        com foco em autonomia, dignidade e segurança.
+    </p>
 
-        A proposta é estruturar parcerias com imóveis e espaços disponíveis, transformando locais ociosos em moradias organizadas e acolhedoras.
+    <p>
+        A proposta é transformar imóveis ociosos em moradias organizadas e acolhedoras,
+        através de parcerias estruturadas e gestão responsável.
+    </p>
 
-        É um projeto em desenvolvimento, construído com responsabilidade, estratégia e visão de longo prazo.
+    <p>
+        O projeto está em desenvolvimento estratégico, com visão de longo prazo
+        e compromisso com impacto social real.
     </p>
 </section>
 
@@ -109,13 +184,13 @@
     <h2>Contato</h2>
 
     <p>
-        📱 WhatsApp:
-        <a href="https://wa.me/5511977487454" target="_blank">Clique aqui</a><br>
+        WhatsApp:
+        <a href="https://wa.me/5511977487454" target="_blank">Clique aqui</a><br><br>
 
-        📧 Email:
-        <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a><br>
+        Email:
+        <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a><br><br>
 
-        📸 Instagram:
+        Instagram:
         <a href="https://instagram.com/pedro.pedr00" target="_blank">@pedro.pedr00</a>
     </p>
 </section>
@@ -124,18 +199,26 @@
     <p>© 2026 A Cara do Pedro - Todos os direitos reservados.</p>
 </footer>
 
+<!-- Botão flutuante WhatsApp -->
+<a class="whatsapp-float" href="https://wa.me/5511977487454" target="_blank">
+    WhatsApp
+</a>
+
 <script>
     const servicosDisponiveis = [
         "formatacao",
+        "formatação",
         "recuperacao",
+        "recuperação",
         "linux",
         "windows",
-        "remocao de virus",
+        "virus",
+        "vírus",
         "upgrade",
         "rede",
         "internet",
-        "criacao de site",
-        "suporte tecnico"
+        "site",
+        "suporte"
     ];
 
     function buscarServico() {
@@ -150,9 +233,9 @@
         const encontrado = servicosDisponiveis.find(servico => input.includes(servico));
 
         if (encontrado) {
-            resultado.innerHTML = "✅ Sim, eu ofereço esse serviço. Vamos conversar!";
+            resultado.innerHTML = "Sim, eu ofereço esse serviço. Vamos conversar!";
         } else {
-            resultado.innerHTML = "❌ Ainda não ofereço esse serviço, mas podemos conversar e avaliar a possibilidade.";
+            resultado.innerHTML = "Ainda não ofereço esse serviço, mas podemos avaliar a possibilidade.";
         }
     }
 </script>
