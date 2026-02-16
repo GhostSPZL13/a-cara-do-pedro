@@ -79,11 +79,34 @@
         transform: scale(1.05);
     }
 
-    #apoie {
+    /* Área de Doação */
+    #doacao {
         background: #111;
         border: 1px solid #00ff88;
         border-radius: 10px;
         padding: 40px 25px;
         box-shadow: 0 0 15px rgba(0,255,136,0.1);
+        text-align: center;
+    }
+
+    #doacao strong {
+        color: #00ff88;
+        font-size: 22px;
+    }
+
+    .botao-doar {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 25px;
+        background: #00ff88;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
+        border-radius: 6px;
+        transition: 0.3s;
+    }
+
+    .botao-doar:hover {
+        transform: scale(1.05);
     }
 </style>
