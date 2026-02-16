@@ -69,7 +69,7 @@
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
-            right: 20px;
+            right: 20px; /* Mantido no lado direito */
             background-color: #25D366;
             color: white;
             padding: 12px 15px;
@@ -77,6 +77,7 @@
             text-decoration: none;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 9998; /* Abaixo do chat IA */
         }
 
         #doacao {
@@ -123,11 +124,11 @@
             flex-wrap: wrap;
         }
 
-        /* Chat IA */
+        /* Chat IA - Movido para o lado esquerdo para evitar sobreposição com WhatsApp */
         #chatIA {
             position: fixed;
             bottom: 100px;
-            right: 20px;
+            left: 20px; /* Mudado de right para left */
             width: 320px;
             max-height: 450px;
             background: #111;
@@ -137,7 +138,7 @@
             flex-direction: column;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
             font-family: Arial, sans-serif;
-            z-index: 9999;
+            z-index: 10000; /* Garantido no topo */
         }
 
         #chatIA-header {
@@ -174,7 +175,7 @@
         #chatButton {
             position: fixed;
             bottom: 20px;
-            right: 100px;
+            left: 20px; /* Mudado de right para left */
             background: #00ff88;
             border: none;
             border-radius: 50%;
@@ -183,7 +184,7 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 9999;
+            z-index: 9999; /* Abaixo do chat, mas acima de outros */
         }
     </style>
 </head>
@@ -353,7 +354,7 @@
         chatMessages.appendChild(userMsg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Mensagem da IA
+        // Mensagem da IA (placeholder enquanto carrega)
         const iaMsg = document.createElement("div");
         iaMsg.style.alignSelf = "flex-start";
         iaMsg.style.background = "#222";
@@ -370,7 +371,7 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": "Bearer SUA_API_KEY_AQUI"
+                    "Authorization": "Bearer SUA_API_KEY_AQUI"  // Substitua por sua chave real!
                 },
                 body: JSON.stringify({
                     model: "gpt-3.5-turbo",
@@ -379,11 +380,15 @@
                 })
             });
 
+            if (!response.ok) {
+                throw new Error(`Erro na API: ${response.status} - ${response.statusText}`);
+            }
+
             const data = await response.json();
             iaMsg.innerText = data.choices[0].message.content;
         } catch(err) {
             console.error(err);
-            iaMsg.innerText = "Ops! Houve um erro, tenta de novo.";
+            iaMsg.innerText = "Ops! Erro ao conectar com a IA. Verifique sua chave da API ou tente novamente.";
         }
 
         chatMessages.scrollTop = chatMessages.scrollHeight;
