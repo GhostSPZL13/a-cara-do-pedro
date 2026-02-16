@@ -76,7 +76,7 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         #doacao {
@@ -84,6 +84,8 @@
             color: white;
             text-align: center;
             border-radius: 10px;
+            padding: 30px 20px;
+            margin-top: 40px;
         }
 
         #doacao h2 {
@@ -105,6 +107,21 @@
             text-decoration: none;
             border-radius: 6px;
         }
+
+        .historia-container img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #222;
+        }
+
+        .historia-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
     </style>
 </head>
 
@@ -123,7 +140,6 @@
         <a href="#contato">Contato</a>
         <a href="#doacao">Doação</a>
         <a href="#historia">Minha História</a>
-
     </nav>
 </header>
 
@@ -138,33 +154,19 @@
         Tecnologia funcional, atendimento direto e entrega com responsabilidade.
     </p>
 </section>
-    <section id="historia">
+
+<section id="historia">
     <h2>Minha História</h2>
-
-    <div class="historia-container" style="display:flex; align-items:center; gap:20px;">
-        <img src="imagens/minha-foto.jpg" alt="Pedro" class="foto-perfil" style="width:150px; height:150px; border-radius:50%; object-fit:cover; border:3px solid #222;">
-
+    <div class="historia-container">
+        <img src="imagens/minha-foto.jpg" alt="Pedro">
         <div class="historia-texto">
-            <p>
-                Eu venho da prática. Aprendi cedo que resultado vem de execução.
-                Trabalhei em eventos, montagem, logística e pressão real.
-            </p>
-
-            <p>
-                A tecnologia entrou na minha vida como ferramenta de transformação.
-                Não apenas como estudo, mas como solução concreta para gerar renda,
-                autonomia e independência.
-            </p>
-
-            <p>
-                Hoje construo projetos com propósito. Meu foco é crescer,
-                estruturar e deixar legado.
-            </p>
+            <p>Eu venho da prática. Aprendi cedo que resultado vem de execução. Trabalhei em eventos, montagem, logística e pressão real.</p>
+            <p>A tecnologia entrou na minha vida como ferramenta de transformação. Não apenas como estudo, mas como solução concreta para gerar renda, autonomia e independência.</p>
+            <p>Hoje construo projetos com propósito. Meu foco é crescer, estruturar e deixar legado.</p>
         </div>
     </div>
 </section>
 
-    
 <section id="confianca">
     <h2>Por que confiar em mim?</h2>
     <ul>
@@ -199,47 +201,28 @@
 
 <section id="experiencia">
     <h2>Experiência de Campo</h2>
-    <p>
-        Trajetória construída na prática, atuando em montagens de eventos,
-        logística e execução sob pressão.
-    </p>
+    <p>Trajetória construída na prática, atuando em montagens de eventos, logística e execução sob pressão.</p>
 </section>
 
 <section id="projeto">
     <h2>Projeto: Lar Sem Fronteiras</h2>
-    <p>
-        Iniciativa social voltada à terceira idade, promovendo autonomia e dignidade.
-    </p>
-    <a href="lar-sem-fronteiras.html" style="color:#00ff88;font-weight:bold;">
-        Conheça o projeto completo →
-    </a>
+    <p>Iniciativa social voltada à terceira idade, promovendo autonomia e dignidade.</p>
+    <a href="lar-sem-fronteiras.html" style="color:#00ff88;font-weight:bold;">Conheça o projeto completo →</a>
 </section>
 
 <section id="contato">
     <h2>Contato</h2>
     <p>
-        WhatsApp:
-        <a href="https://wa.me/5511977487454" target="_blank">Clique aqui</a><br><br>
-
-        Email:
-        <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a><br><br>
-
-        Instagram:
-        <a href="https://instagram.com/pedro.pedr00" target="_blank">@pedro.pedr00</a>
+        WhatsApp: <a href="https://wa.me/5511977487454" target="_blank">Clique aqui</a><br><br>
+        Email: <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a><br><br>
+        Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank">@pedro.pedr00</a>
     </p>
 </section>
 
 <section id="doacao">
     <h2>Ajude a manter o projeto vivo</h2>
-    <p>
-        Este projeto é independente e movido por propósito.
-        Se você acredita nessa missão e deseja contribuir para que ela continue crescendo,
-        considere apoiar via PIX.
-    </p>
-
-    <p>Chave PIX:</p>
-    <p><strong>19 93300-4521</strong></p>
-
+    <p>Este projeto é independente e movido por propósito. Se você acredita nessa missão e deseja contribuir para que ela continue crescendo, considere apoiar via PIX.</p>
+    <p>Chave PIX: <strong>19 93300-4521</strong></p>
     <a class="botao-doar" href="#doacao">Quero apoiar o projeto</a>
 </section>
 
@@ -247,9 +230,7 @@
     <p>© 2026 A Cara do Pedro - Todos os direitos reservados.</p>
 </footer>
 
-<a class="whatsapp-float"
-   href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..."
-   target="_blank">
+<a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank">
     WhatsApp
 </a>
 
@@ -263,18 +244,16 @@
         const input = document.getElementById("searchInput").value.toLowerCase();
         const resultado = document.getElementById("resultadoBusca");
 
-        if (input.length === 0) {
+        if (!input) {
             resultado.innerHTML = "";
             return;
         }
 
         const encontrado = servicosDisponiveis.find(servico => input.includes(servico));
 
-        if (encontrado) {
-            resultado.innerHTML = "Sim, eu ofereço esse serviço. Vamos conversar!";
-        } else {
-            resultado.innerHTML = "Podemos avaliar a possibilidade. Me chama no WhatsApp.";
-        }
+        resultado.innerHTML = encontrado
+            ? "Sim, eu ofereço esse serviço. Vamos conversar!"
+            : "Podemos avaliar a possibilidade. Me chama no WhatsApp.";
     }
 </script>
 
