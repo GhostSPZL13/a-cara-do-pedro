@@ -78,6 +78,33 @@
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
+
+        #doacao {
+            background: #111;
+            color: white;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        #doacao h2 {
+            border-left: none;
+        }
+
+        #doacao strong {
+            font-size: 22px;
+            color: #00ff88;
+        }
+
+        .botao-doar {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #00ff88;
+            color: #111;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+        }
     </style>
 </head>
 
@@ -94,13 +121,14 @@
         <a href="#experiencia">Experiência</a>
         <a href="#projeto">Projeto</a>
         <a href="#contato">Contato</a>
+        <a href="#doacao">Doação</a>
     </nav>
 </header>
 
 <section id="sobre">
     <h2>Sobre</h2>
     <p>
-        Seja bem-vindo. A Cara do Pedro é uma vitrine de soluções reais.
+        A Cara do Pedro é uma vitrine de soluções reais.
         Uno experiência prática, tecnologia e visão estratégica para resolver problemas de forma objetiva.
     </p>
     <p>
@@ -118,18 +146,10 @@
         <li>✔ Atendimento direto e objetivo</li>
         <li>✔ Compromisso com prazo e qualidade</li>
     </ul>
-    <p>
-        Minha base foi construída na execução. Eu não apenas estudo tecnologia — eu aplico e entrego.
-    </p>
 </section>
 
 <section id="servicos">
     <h2>Serviços</h2>
-    <p>
-        Eu resolvo problemas. Se está lento, eu otimizo.
-        Se travou, eu recupero. Simples, direto e eficiente.
-    </p>
-
     <ul>
         <li>Formatação e recuperação</li>
         <li>Instalação Windows e Linux</li>
@@ -137,9 +157,9 @@
         <li>Upgrade estratégico</li>
         <li>Configuração de redes</li>
         <li>Criação de sites simples</li>
-        <li>limpeza de terrenos</li>
-        <li>arrumo lugares que ninguem quer arrumar</li>
-        <li>levo seu cachorro e animais pra passear e ter um bem estar social</li>
+        <li>Limpeza de terrenos</li>
+        <li>Organização de espaços</li>
+        <li>Passeio e bem-estar para animais</li>
     </ul>
 
     <div class="busca-servico">
@@ -152,29 +172,20 @@
 <section id="experiencia">
     <h2>Experiência de Campo</h2>
     <p>
-        Minha trajetória foi construída na prática, atuando em montagens de eventos,
+        Trajetória construída na prática, atuando em montagens de eventos,
         logística e execução sob pressão.
-    </p>
-    <p>
-        Trabalhei em eventos no Monte Líbano e em stands de marcas como Tramontina.
-    </p>
-    <p>
-        Hoje aplico essa mentalidade de execução estratégica na tecnologia.
     </p>
 </section>
 
 <section id="projeto">
     <h2>Projeto: Lar Sem Fronteiras</h2>
-
     <p>
         Iniciativa social voltada à terceira idade, promovendo autonomia e dignidade.
     </p>
-
     <a href="lar-sem-fronteiras.html" style="color:#00ff88;font-weight:bold;">
         Conheça o projeto completo →
     </a>
 </section>
-
 
 <section id="contato">
     <h2>Contato</h2>
@@ -188,32 +199,36 @@
         Instagram:
         <a href="https://instagram.com/pedro.pedr00" target="_blank">@pedro.pedr00</a>
     </p>
-
-    
-    <section id="doacao">
-  <h2>Ajude a manter o projeto vivo</h2>
-  <p>Se você acredita nessa ideia e quer ver ela crescer, qualquer contribuição faz diferença.</p>
-
-  <h3>PIX:</h3>
-  <p>19 933004521</p>
 </section>
 
+<section id="doacao">
+    <h2>Ajude a manter o projeto vivo</h2>
+    <p>
+        Este projeto é independente e movido por propósito.
+        Se você acredita nessa missão e deseja contribuir para que ela continue crescendo,
+        considere apoiar via PIX.
+    </p>
+
+    <p>Chave PIX:</p>
+    <p><strong>19 93300-4521</strong></p>
+
+    <a class="botao-doar" href="#doacao">Quero apoiar o projeto</a>
+</section>
 
 <footer>
     <p>© 2026 A Cara do Pedro - Todos os direitos reservados.</p>
 </footer>
 
-<a class="whatsapp-float" 
+<a class="whatsapp-float"
    href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..."
    target="_blank">
     WhatsApp
 </a>
 
-
 <script>
     const servicosDisponiveis = [
         "formatacao", "formatação", "recuperacao", "linux",
-        "windows", "virus", "upgrade", "rede", "site", "suporte"
+        "windows", "virus", "upgrade", "rede", "site"
     ];
 
     function buscarServico() {
