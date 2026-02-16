@@ -1,4 +1,10 @@
 <style>
+<!-- ===== Chat Bot ===== -->
+<div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:300px;height:400px;background:#111;color:white;padding:10px;border-radius:10px;display:flex;flex-direction:column;box-shadow:0 0 15px rgba(0,255,136,0.3);">
+    <div id="bot-messages" style="flex:1;overflow:auto;margin-bottom:10px;padding-right:5px;"></div>
+    <input id="bot-input" type="text" placeholder="Fala comigo..." style="width:100%;padding:8px;border:1px solid #00ff88;border-radius:6px;background:#1a1a1a;color:white;">
+</div>
+
     body {
         font-family: Arial, sans-serif;
         margin: 0;
