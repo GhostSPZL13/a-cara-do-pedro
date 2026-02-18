@@ -30,11 +30,19 @@
             padding: 30px 20px;
         }
 
+        nav {
+            margin-top: 15px;
+        }
+
         nav a {
             color: #00ff88;
             margin: 0 10px;
             text-decoration: none;
             font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         section {
@@ -69,7 +77,7 @@
         .whatsapp-float {
             position: fixed;
             bottom: 20px;
-            right: 20px; /* Mantido no lado direito */
+            right: 20px;
             background-color: #25D366;
             color: white;
             padding: 12px 15px;
@@ -77,7 +85,7 @@
             text-decoration: none;
             font-weight: bold;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 9998; /* Abaixo do chat IA */
+            z-index: 9998;
         }
 
         #doacao {
@@ -124,11 +132,10 @@
             flex-wrap: wrap;
         }
 
-        /* Chat IA - Movido para o lado esquerdo para evitar sobreposição com WhatsApp */
         #chatIA {
             position: fixed;
             bottom: 100px;
-            left: 20px; /* Mudado de right para left */
+            left: 20px;
             width: 320px;
             max-height: 450px;
             background: #111;
@@ -138,7 +145,7 @@
             flex-direction: column;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
             font-family: Arial, sans-serif;
-            z-index: 10000; /* Garantido no topo */
+            z-index: 10000;
         }
 
         #chatIA-header {
@@ -175,7 +182,7 @@
         #chatButton {
             position: fixed;
             bottom: 20px;
-            left: 20px; /* Mudado de right para left */
+            left: 20px;
             background: #00ff88;
             border: none;
             border-radius: 50%;
@@ -184,7 +191,7 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 9999; /* Abaixo do chat, mas acima de outros */
+            z-index: 9999;
         }
     </style>
 </head>
@@ -222,7 +229,7 @@
 <section id="historia">
     <h2>Minha História</h2>
     <div class="historia-container">
-        <img src="imagens/minha-foto.jpg" alt="Pedro">
+        <img src="imagens/minha-foto.jpg" alt="Foto de Pedro" onerror="this.style.display='none'">
         <div class="historia-texto">
             <p>Eu venho da prática. Aprendi cedo que resultado vem de execução. Trabalhei em eventos, montagem, logística e pressão real.</p>
             <p>A tecnologia entrou na minha vida como ferramenta de transformação. Não apenas como estudo, mas como solução concreta para gerar renda, autonomia e independência.</p>
@@ -258,7 +265,7 @@
 
     <div class="busca-servico">
         <h3>Buscar Serviço</h3>
-        <input type="text" id="searchInput" placeholder="Digite o serviço..." onkeyup="buscarServico()">
+        <input type="text" id="searchInput" placeholder="Digite o serviço...">
         <p id="resultadoBusca"></p>
     </div>
 </section>
@@ -277,9 +284,9 @@
 <section id="contato">
     <h2>Contato</h2>
     <p>
-        WhatsApp: <a href="https://wa.me/5511977487454" target="_blank">Clique aqui</a><br><br>
+        WhatsApp: <a href="https://wa.me/5511977487454" target="_blank" rel="noopener noreferrer">Clique aqui</a><br><br>
         Email: <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a><br><br>
-        Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank">@pedro.pedr00</a>
+        Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank" rel="noopener noreferrer">@pedro.pedr00</a>
     </p>
 </section>
 
@@ -287,18 +294,17 @@
     <h2>Ajude a manter o projeto vivo</h2>
     <p>Este projeto é independente e movido por propósito. Se você acredita nessa missão e deseja contribuir para que ela continue crescendo, considere apoiar via PIX.</p>
     <p>Chave PIX: <strong>19 93300-4521</strong></p>
-    <a class="botao-doar" href="#doacao">Quero apoiar o projeto</a>
+    <a class="botao-doar" href="#contato">Quero apoiar o projeto</a>
 </section>
 
 <footer>
     <p>© 2026 A Cara do Pedro - Todos os direitos reservados.</p>
 </footer>
 
-<a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank">
+<a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer">
     WhatsApp
 </a>
 
-<!-- Chat IA -->
 <div id="chatIA">
     <div id="chatIA-header">
         Chat IA
@@ -325,16 +331,18 @@
             : "Podemos avaliar a possibilidade. Me chama no WhatsApp.";
     }
 
+    document.getElementById("searchInput").addEventListener("input", buscarServico);
+
     function toggleChatIA() {
         const chat = document.getElementById("chatIA");
         chat.style.display = chat.style.display === "flex" ? "none" : "flex";
     }
 
-    const chatInput = document.getElementById("chatInput");
-    chatInput.addEventListener("keypress", function(e) {
+    document.getElementById("chatInput").addEventListener("keydown", function(e) {
         if(e.key === "Enter") {
-            enviarMensagem(chatInput.value);
-            chatInput.value = "";
+            e.preventDefault();
+            enviarMensagem(this.value.trim());
+            this.value = "";
         }
     });
 
@@ -342,7 +350,6 @@
         if(!msg) return;
         const chatMessages = document.getElementById("chatMessages");
 
-        // Mensagem do usuário
         const userMsg = document.createElement("div");
         userMsg.style.alignSelf = "flex-end";
         userMsg.style.background = "#00ff88";
@@ -354,7 +361,6 @@
         chatMessages.appendChild(userMsg);
         chatMessages.scrollTop = chatMessages.scrollHeight;
 
-        // Mensagem da IA (placeholder enquanto carrega)
         const iaMsg = document.createElement("div");
         iaMsg.style.alignSelf = "flex-start";
         iaMsg.style.background = "#222";
@@ -362,35 +368,8 @@
         iaMsg.style.padding = "8px 12px";
         iaMsg.style.borderRadius = "12px 12px 12px 0";
         iaMsg.style.maxWidth = "80%";
-        iaMsg.innerText = "Digitando...";
+        iaMsg.innerText = "Chat indisponível no momento.";
         chatMessages.appendChild(iaMsg);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
-
-        try {
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": "Bearer SUA_API_KEY_AQUI"  // Substitua por sua chave real!
-                },
-                body: JSON.stringify({
-                    model: "gpt-3.5-turbo",
-                    messages: [{role:"user", content: msg}],
-                    max_tokens: 250
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error(`Erro na API: ${response.status} - ${response.statusText}`);
-            }
-
-            const data = await response.json();
-            iaMsg.innerText = data.choices[0].message.content;
-        } catch(err) {
-            console.error(err);
-            iaMsg.innerText = "Ops! Erro ao conectar com a IA. Verifique sua chave da API ou tente novamente.";
-        }
-
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 </script>
