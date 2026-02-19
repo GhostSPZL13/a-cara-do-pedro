@@ -1,3 +1,5 @@
+Aqui está seu código completo corrigido com os dois problemas resolvidos:
+
 ```html
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -211,6 +213,14 @@
             .menu-toggle {
                 display: none;
             }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .sidebar-overlay {
+                display: none;
+            }
         }
 
         section {
@@ -354,6 +364,7 @@
             object-fit: cover;
             border: 4px solid #00e676;
             background: #ccc;
+            display: block;
         }
 
         .historia-texto p {
@@ -563,7 +574,7 @@
             outline-offset: 3px;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 767px) {
             #chatAI-widget {
                 left: 0.75rem;
                 bottom: 5rem;
@@ -641,7 +652,7 @@
         <section id="historia">
             <h2>Minha História</h2>
             <div class="historia-container">
-                <img src="imagens/minha-foto.jpg" alt="Foto de Pedro" onerror="this.style.display='none'">
+                <img src="imagens/minha-foto.jpg" alt="Foto de Pedro">
                 <div class="historia-texto">
                     <p>Eu venho da prática. Aprendi cedo que resultado vem de execução. Trabalhei em eventos, montagem, logística e pressão real.</p>
                     <p>A tecnologia entrou na minha vida como ferramenta de transformação. Não apenas como estudo, mas como solução concreta para gerar renda, autonomia e independência.</p>
