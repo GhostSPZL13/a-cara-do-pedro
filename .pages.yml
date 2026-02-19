@@ -1,0 +1,37 @@
+# .pages.yml
+site:
+  - name: "A Cara do Pedro"
+    description: "Soluções técnicas com propósito - Tecnologia, mão de obra e projeto social"
+    url: "https://seuusuario.github.io"  # Troque pelo seu URL do GitHub Pages
+
+collections:
+  - name: "paginas"
+    label: "Páginas do Site"
+    files:
+      - name: "historia"
+        label: "Minha História"
+        file: "index.html"
+        fields:
+          - name: "titulo_historia"
+            label: "Título da História"
+            type: "string"
+            default: "Raízes Fortes, História Viva"
+            selector: "#historia .historia-titulo"
+          
+          - name: "texto_historia"
+            label: "Texto da História"
+            type: "text"
+            default: "Sou fruto do encontro de brasis. Nascido em Itaquaquecetuba, carrego em meu DNA a força do Nordeste e a energia de São Paulo..."
+            selector: "#historia .historia-texto"
+          
+          - name: "foto_perfil"
+            label: "Foto de Perfil"
+            type: "image"
+            default: "/imagens/minhafoto.png"
+            selector: "#historia img"
+      
+      - name: "servicos"
+        label: "Lista de Serviços"
+        file: "index.html"
+        fields:
+          - name: "tecnologia"
