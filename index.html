@@ -21,14 +21,19 @@
 
         body {
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-            background-color: #f4f4f4;
             color: #1e1e1e;
             scroll-behavior: smooth;
             line-height: 1.5;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            transition: background-image 0.5s ease;
         }
 
         header {
-            background: #0a0a0a;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(5px);
             color: white;
             text-align: center;
             padding: 2.5rem 1rem;
@@ -73,6 +78,11 @@
             padding: 3rem 1rem;
             max-width: 75rem;
             margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(4px);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
 
         h2 {
@@ -102,7 +112,8 @@
         }
 
         footer {
-            background: #0a0a0a;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(5px);
             color: white;
             text-align: center;
             padding: 2rem;
@@ -157,7 +168,8 @@
         }
 
         #doacao {
-            background: #0a0a0a;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(5px);
             color: white;
             text-align: center;
             border-radius: 24px;
@@ -528,6 +540,25 @@
         (function() {
             'use strict';
 
+            // BACKGROUND INTELIGENTE - HORÁRIO DE SÃO PAULO
+            function atualizarBackground() {
+                const agora = new Date();
+                const options = { timeZone: 'America/Sao_Paulo', hour: 'numeric', hour12: false };
+                const horaSP = parseInt(agora.toLocaleString('pt-BR', options));
+                
+                let backgroundImage;
+                if (horaSP >= 6 && horaSP < 18) {
+                    backgroundImage = "url('imagens/spdia.png')";
+                } else {
+                    backgroundImage = "url('imagens/spnoite.png')";
+                }
+                
+                document.body.style.backgroundImage = backgroundImage;
+            }
+            
+            atualizarBackground();
+            setInterval(atualizarBackground, 60000);
+
             // ---- busca serviço ----
             const servicosLista = [
                 "formatacao", "formatação", "recuperacao", "linux", "windows", "virus", "upgrade", "rede", "site",
@@ -629,10 +660,7 @@
                 });
             }
 
-            // esconder chat por padrão
             if (chatWidget) chatWidget.style.display = 'none';
-
-            // fechar ao clicar fora (opcional) - mas melhor sem para não confundir
         })();
     </script>
 </body>
