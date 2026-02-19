@@ -1,4 +1,3 @@
- ```html
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -52,7 +51,6 @@
             margin: 0.75rem 0 1.5rem;
         }
 
-        /* MENU HAMBURGER */
         .menu-toggle {
             position: fixed;
             top: 1rem;
@@ -99,7 +97,6 @@
             transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        /* SIDEBAR NAVIGATION */
         .sidebar {
             position: fixed;
             top: 0;
@@ -182,7 +179,6 @@
             visibility: visible;
         }
 
-        /* NAV DESKTOP (escondido em mobile) */
         nav.desktop-nav {
             display: none;
         }
@@ -374,7 +370,6 @@
             color: #00e676;
         }
 
-        /* ===== WIDGET DE IA ===== */
         #chatAI-widget {
             position: fixed;
             bottom: 6rem;
@@ -570,14 +565,12 @@
 </head>
 
 <body>
-    <!-- BOTÃO HAMBURGER -->
     <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Abrir menu">
         <span></span>
         <span></span>
         <span></span>
     </button>
 
-    <!-- SIDEBAR -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>Menu</h3>
@@ -595,7 +588,6 @@
         </nav>
     </div>
 
-    <!-- OVERLAY -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
     <header>
@@ -676,9 +668,9 @@
 
         <section id="contato">
             <h2>Contato</h2>
-            <p>WhatsApp: <a href="https://wa.me/5511977487454 " target="_blank" rel="noopener noreferrer">Clique aqui</a></p>
+            <p>WhatsApp: <a href="https://wa.me/5511977487454" target="_blank" rel="noopener noreferrer">Clique aqui</a></p>
             <p>Email: <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a></p>
-            <p>Instagram: <a href="https://instagram.com/pedro.pedr00 " target="_blank" rel="noopener noreferrer">@pedro.pedr00</a></p>
+            <p>Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank" rel="noopener noreferrer">@pedro.pedr00</a></p>
         </section>
 
         <section id="doacao">
@@ -693,11 +685,10 @@
         <p>© 2026 A Cara do Pedro – Todos os direitos reservados.</p>
     </footer>
 
-    <a class="whatsapp-float" href="https://wa.me/5511977487454?text=Ol á%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
+    <a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
         <span>WhatsApp</span>
     </a>
 
-    <!-- WIDGET DE IA -->
     <div id="chatAI-widget" role="dialog" aria-label="Janela de chat com assistente virtual">
         <div id="chatAI-header">
             <span>Assistente IA</span>
@@ -715,10 +706,11 @@
     <script>
         (function() {
             'use strict';
+ Objetivo: Desenvolver e implementar um widget de chat com inteligência artificial embeddable, operando sob o modelo backend-as-a-service (BaaS), eliminando a necessidade de gerenciamento direto de API keys ou infraestrutura de servidor próprio.
 
-            // SIDEBAR FUNCTIONS
             window.toggleSidebar = function() {
-                const sidebar = document.getElementById('sidebar');
+                const sidebar = document.getElementById('sidebar'); Objetivo: Desenvolver e implementar um widget de chat com inteligência artificial embeddable, operando sob o modelo backend-as-a-service (BaaS), eliminando a necessidade de gerenciamento direto de API keys ou infraestrutura de servidor próprio.
+
                 const overlay = document.getElementById('sidebarOverlay');
                 const toggle = document.querySelector('.menu-toggle');
                 
@@ -737,14 +729,12 @@
                 toggle.classList.remove('active');
             };
 
-            // Fechar sidebar ao redimensionar para desktop
             window.addEventListener('resize', function() {
                 if (window.innerWidth >= 768) {
                     closeSidebar();
                 }
             });
 
-            // BACKGROUND INTELIGENTE - HORÁRIO DE SÃO PAULO
             function atualizarBackground() {
                 const agora = new Date();
                 const options = { timeZone: 'America/Sao_Paulo', hour: 'numeric', hour12: false };
@@ -763,7 +753,6 @@
             atualizarBackground();
             setInterval(atualizarBackground, 60000);
 
-            // ---- busca serviço ----
             const servicosLista = [
                 "formatacao", "formatação", "recuperacao", "linux", "windows", "virus", "upgrade", "rede", "site",
                 "limpeza", "terreno", "passeio", "animal", "organização", "espaços"
@@ -788,11 +777,11 @@
                 searchInput.addEventListener('input', buscarServico);
             }
 
-            // ---- chat IA ----
             const chatWidget = document.getElementById('chatAI-widget');
             const chatMessages = document.getElementById('chatMessages');
             const chatInput = document.getElementById('chatInput');
             const chatSend = document.getElementById('chatSend');
+            const chatButton = document.getElementById('chatButton');
             let isChatOpen = false;
 
             window.toggleChat = function() {
@@ -801,10 +790,14 @@
                 chatWidget.style.display = isHidden ? 'flex' : 'none';
                 isChatOpen = !isHidden;
                 if (isChatOpen && chatMessages.children.length === 0) {
-                    adicionarMensagem('bot', 'Olá! Sou o assistente virtual. Posso ajudar com informações sobre serviços, horários ou o projeto Lar Sem Fronteiras.');
+                    adicionarMensagem('bot', 'Olá! Sou o assistente virtual da Cara do Pedro. Como posso ajudar você hoje?');
                 }
                 if (isChatOpen) chatInput.focus();
             };
+
+            if (chatButton) {
+                chatButton.addEventListener('click', toggleChat);
+            }
 
             function adicionarMensagem(remetente, texto) {
                 if (!texto.trim()) return;
@@ -815,27 +808,85 @@
                 chatMessages.scrollTop = chatMessages.scrollHeight;
             }
 
+            const baseDeConhecimento = [
+                {
+                    palavras: ['oi', 'olá', 'boa tarde', 'bom dia', 'boa noite', 'começar', 'iniciar'],
+                    resposta: 'Olá! Bem-vindo à Cara do Pedro. Sou seu assistente virtual. Posso ajudar com informações sobre serviços técnicos, projetos sociais, horários de atendimento, formas de contato ou doações. O que você precisa?'
+                },
+                {
+                    palavras: ['formatação', 'formatar', 'windows', 'linux', 'sistema operacional', 'instalar', 'virus', 'recuperação'],
+                    resposta: 'Ofereço serviços completos de formatação, instalação de Windows e Linux, remoção de vírus e recuperação de dados. Faço atendimento em Itaquaquecetuba e região. Posso te passar mais detalhes pelo WhatsApp?'
+                },
+                {
+                    palavras: ['rede', 'wifi', 'internet', 'configurar', 'roteador', 'conexão'],
+                    resposta: 'Realizo configuração de redes domésticas e empresariais, incluindo instalação de roteadores, repetidores e solução de problemas de conexão. Quer agendar uma visita técnica?'
+                },
+                {
+                    palavras: ['upgrade', 'memória', 'ssd', 'hd', 'processador', 'melhorar', 'velocidade'],
+                    resposta: 'Faço upgrade estratégico de hardware para melhorar o desempenho do seu computador. Analiso suas necessidades e recomendo as melhores peças com melhor custo-benefício.'
+                },
+                {
+                    palavras: ['site', 'criação', 'desenvolvimento', 'página', 'landing page'],
+                    resposta: 'Crio sites simples e profissionais para pequenos negócios, portfólios e landing pages. Trabalho com HTML5, CSS3 e JavaScript puro. Entre em contato para conversarmos sobre seu projeto!'
+                },
+                {
+                    palavras: ['limpeza', 'terreno', 'jardim', 'espaço', 'organização', 'jardinagem'],
+                    resposta: 'Ofereço serviços de limpeza e organização de terrenos, espaços comerciais e residenciais. Atendo com responsabilidade e preço justo. Posso fazer um orçamento sem compromisso.'
+                },
+                {
+                    palavras: ['passeio', 'animal', 'cachorro', 'pet', 'bem-estar', 'animais'],
+                    resposta: 'Cuido do bem-estar do seu pet com serviços de passeio, recreação e acompanhamento. Seu animal recebe atenção, carinho e exercício com segurança.'
+                },
+                {
+                    palavras: ['horário', 'atendimento', 'funcionamento', 'aberto', 'dias'],
+                    resposta: 'Meu horário de atendimento é de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Fora desse horário, você pode deixar sua mensagem que retorno assim que possível.'
+                },
+                {
+                    palavras: ['contato', 'telefone', 'whatsapp', 'email', 'instagram', 'falar', 'comunicar'],
+                    resposta: 'Você pode falar comigo pelos seguintes canais:\n📱 WhatsApp: (11) 97748-7454\n📧 Email: pedro.098259@gmail.com\n📷 Instagram: @pedro.pedr00\nFique à vontade para me chamar!'
+                },
+                {
+                    palavras: ['valor', 'preço', 'custo', 'orçamento', 'quanto custa', 'investimento'],
+                    resposta: 'Os valores variam conforme o serviço e a complexidade. Me envie uma mensagem no WhatsApp com detalhes do que precisa para eu preparar um orçamento personalizado e justo para você.'
+                },
+                {
+                    palavras: ['pix', 'doação', 'apoiar', 'contribuir', 'ajudar', 'projeto', 'lar sem fronteiras'],
+                    resposta: 'Que bom que você quer apoiar! O Lar Sem Fronteiras é meu projeto social para terceira idade. A chave PIX para doações é: 19 93300-4521. Toda contribuição ajuda a manter esse sonho vivo. Gratidão!'
+                },
+                {
+                    palavras: ['lar sem fronteiras', 'projeto social', 'idoso', 'terceira idade', 'asilo'],
+                    resposta: 'Lar Sem Fronteiras é um projeto social que desenvolvo para promover autonomia e dignidade à terceira idade. Ofereço suporte técnico, visitas e ações sociais. Leia mais sobre na seção "Projeto" do site.'
+                },
+                {
+                    palavras: ['sobre', 'quem é', 'pedro', 'história', 'trajetória'],
+                    resposta: 'Pedro é um profissional com experiência prática em tecnologia, eventos, logística e soluções reais. Começou cedo, trabalhou sob pressão e hoje usa a tecnologia como ferramenta de transformação social. Conheça mais na seção "Minha História".'
+                },
+                {
+                    palavras: ['serviço', 'serviços', 'oferece', 'faz', 'trabalha', 'disponível'],
+                    resposta: 'Ofereço serviços de informática (formatação, upgrade, redes, criação de sites), limpeza de terrenos, organização de espaços e bem-estar animal (passeio e recreação). Qual deles te interessa?'
+                },
+                {
+                    palavras: ['obrigado', 'valeu', 'ajudou', 'ótimo', 'excelente'],
+                    resposta: 'Fico feliz em ajudar! Se precisar de mais alguma coisa, é só chamar. Estou aqui para isso. 😊'
+                },
+                {
+                    palavras: ['tchau', 'até mais', 'encerrar', 'sair', 'finalizar'],
+                    resposta: 'Obrigado pela conversa! Se surgir alguma dúvida, é só abrir o chat novamente. Tenha um ótimo dia!'
+                }
+            ];
+
             function processarMensagem(texto) {
-                const lower = texto.toLowerCase();
-                if (lower.includes('format') || lower.includes('linux') || lower.includes('windows') || lower.includes('virus')) {
-                    return 'Ofereço formatação, instalação de sistemas e remoção de vírus. Me chame no WhatsApp para detalhes!';
+                const lower = texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                
+                for (let item of baseDeConhecimento) {
+                    for (let palavra of item.palavras) {
+                        if (lower.includes(palavra)) {
+                            return item.resposta;
+                        }
+                    }
                 }
-                if (lower.includes('rede') || lower.includes('wifi') || lower.includes('configuração')) {
-                    return 'Sim, trabalho com configuração de redes domésticas e pequenas empresas.';
-                }
-                if (lower.includes('limpeza') || lower.includes('terreno') || lower.includes('passeio') || lower.includes('animal')) {
-                    return 'Também realizo limpeza de terrenos, organização e passeio com animais. É um prazer ajudar!';
-                }
-                if (lower.includes('horário') || lower.includes('atendimento')) {
-                    return 'Atendo de segunda a sexta, 8h às 18h, e aos sábados até 12h. Fora disso, o chat funciona 24h.';
-                }
-                if (lower.includes('lar sem fronteiras') || lower.includes('projeto')) {
-                    return 'Lar Sem Fronteiras é meu projeto social para idosos. Você pode ler mais na seção "Projeto".';
-                }
-                if (lower.includes('pix') || lower.includes('doação') || lower.includes('apoiar')) {
-                    return 'Toda contribuição é bem-vinda! A chave PIX é 19 93300-4521. Gratidão!';
-                }
-                return 'Posso ajudar com serviços, horários, doações ou o projeto. Fale mais sobre o que precisa!';
+                
+                return 'Desculpe, não entendi completamente. Posso ajudar com informações sobre:\n\n• Formatação e sistemas (Windows/Linux)\n• Configuração de redes\n• Limpeza de terrenos\n• Passeio com animais\n• Projeto Lar Sem Fronteiras\n• Doações via PIX\n\nMe fale mais sobre o que você precisa!';
             }
 
             function enviarMensagem() {
@@ -848,7 +899,7 @@
                 setTimeout(() => {
                     const resposta = processarMensagem(msg);
                     adicionarMensagem('bot', resposta);
-                }, 400);
+                }, 500);
             }
 
             if (chatSend) {
@@ -870,4 +921,3 @@
 </body>
 
 </html>
-```
