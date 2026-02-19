@@ -2,7 +2,7 @@
 site:
   - name: "A Cara do Pedro"
     description: "Soluções técnicas com propósito - Tecnologia, mão de obra e projeto social"
-    url: "https://seuusuario.github.io"  # Troque pelo seu URL do GitHub Pages
+    url: "https://ghostspzl13.github.io/acaradopedro"
 
 collections:
   - name: "paginas"
