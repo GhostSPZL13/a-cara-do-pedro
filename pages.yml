@@ -1,0 +1,17 @@
+# pages.yml
+site:
+  - name: "A Cara do Pedro"
+    description: "Meu site pessoal"
+
+collections:
+  - name: "paginas"
+    label: "Páginas"
+    files:
+      - name: "historia"
+        label: "Minha História"
+        file: "index.html"
+        fields:
+          - name: "conteudo_historia"
+            label: "Texto da História"
+            type: "text"
+            selector: "#historia .historia-texto"
