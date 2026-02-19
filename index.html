@@ -462,6 +462,31 @@
             border-bottom-left-radius: 4px;
         }
 
+        .suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem 1.2rem;
+            background: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .suggestion-chip {
+            background: white;
+            border: 1px solid #00e676;
+            color: #0a0a0a;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-chip:hover {
+            background: #00e676;
+            color: #0a0a0a;
+        }
+
         #chatInput-area {
             display: flex;
             padding: 0.8rem;
@@ -639,14 +664,27 @@
         <section id="servicos">
             <h2>Serviços</h2>
             <ul>
-                <li>Formatação e recuperação</li>
-                <li>Instalação Windows e Linux</li>
-                <li>Remoção de vírus</li>
-                <li>Upgrade estratégico</li>
-                <li>Configuração de redes</li>
-                <li>Criação de sites simples</li>
+                <li><strong>🔧 SERVIÇOS EM TECNOLOGIA</strong></li>
+                <li>Formatação e recuperação de sistemas</li>
+                <li>Instalação de Windows e Linux</li>
+                <li>Remoção de vírus e otimização de desempenho</li>
+                <li>Upgrade estratégico (SSD, memória, melhoria de performance)</li>
+                <li>Configuração de redes residenciais e comerciais</li>
+                <li>Criação de sites simples e institucionais</li>
+                <li style="margin-top: 0.8rem;"><strong>🏗 SERVIÇOS OPERACIONAIS E MÃO DE OBRA</strong></li>
+                <li>Montagem e desmontagem de stands para eventos</li>
+                <li>Equipe de apoio operacional para comércios e empresas</li>
+                <li>Profissionais à disposição durante horário contratado</li>
+                <li>Organização de estoque e espaços comerciais</li>
                 <li>Limpeza de terrenos</li>
-                <li>Organização de espaços</li>
+                <li>Organização e revitalização de ambientes</li>
+                <li style="margin-top: 0.8rem;"><strong>🧱 SERVIÇOS EM OBRA E MANUTENÇÃO</strong></li>
+                <li>Ajudante de pedreiro</li>
+                <li>Apoio em serviços elétricos</li>
+                <li>Pintura residencial e comercial</li>
+                <li>Montagem de móveis</li>
+                <li>Serviços básicos de marcenaria</li>
+                <li style="margin-top: 0.8rem;"><strong>🐾 SERVIÇOS COMPLEMENTARES</strong></li>
                 <li>Passeio e bem-estar para animais</li>
             </ul>
             <div class="busca-servico">
@@ -693,16 +731,17 @@
     <div id="chatAI-widget" role="dialog" aria-label="Janela de chat com assistente virtual">
         <div id="chatAI-header">
             <span>Assistente IA</span>
-            <button onclick="toggleChat()" aria-label="Fechar chat">✕</button>
+            <button id="closeChatBtn" aria-label="Fechar chat">✕</button>
         </div>
         <div id="chatMessages" role="log" aria-live="polite"></div>
+        <div class="suggestions" id="suggestions"></div>
         <div id="chatInput-area">
             <input type="text" id="chatInput" placeholder="Digite sua mensagem..." aria-label="Mensagem para o assistente">
             <button id="chatSend" aria-label="Enviar mensagem">→</button>
         </div>
     </div>
 
-    <button id="chatButton" onclick="toggleChat()" aria-label="Abrir chat">IA</button>
+    <button id="chatButton" aria-label="Abrir chat">IA</button>
 
     <script>
         (function() {
@@ -754,7 +793,7 @@
 
             const servicosLista = [
                 "formatacao", "formatação", "recuperacao", "linux", "windows", "virus", "upgrade", "rede", "site",
-                "limpeza", "terreno", "passeio", "animal", "organização", "espaços"
+                "limpeza", "terreno", "passeio", "animal", "organização", "espaços", "pedreiro", "elétrico", "pintura", "montagem", "marcenaria", "stand", "estoque", "revitalização"
             ];
 
             const searchInput = document.getElementById('searchInput');
@@ -781,22 +820,16 @@
             const chatInput = document.getElementById('chatInput');
             const chatSend = document.getElementById('chatSend');
             const chatButton = document.getElementById('chatButton');
-            let isChatOpen = false;
+            const closeChatBtn = document.getElementById('closeChatBtn');
+            const suggestionsDiv = document.getElementById('suggestions');
 
-            window.toggleChat = function() {
-                if (!chatWidget) return;
-                const isHidden = chatWidget.style.display === 'none' || getComputedStyle(chatWidget).display === 'none';
-                chatWidget.style.display = isHidden ? 'flex' : 'none';
-                isChatOpen = !isHidden;
-                if (isChatOpen && chatMessages.children.length === 0) {
-                    adicionarMensagem('bot', 'Olá! Sou o assistente virtual da Cara do Pedro. Como posso ajudar você hoje?');
-                }
-                if (isChatOpen) chatInput.focus();
-            };
-
-            if (chatButton) {
-                chatButton.addEventListener('click', toggleChat);
-            }
+            const frasesAutomaticas = [
+                "Olá, como posso ajudar você hoje?",
+                "Você pode perguntar sobre meus serviços.",
+                "Deseja orçamento?",
+                "Precisa de suporte técnico ou mão de obra?",
+                "Estou pronto para atender você."
+            ];
 
             function adicionarMensagem(remetente, texto) {
                 if (!texto.trim()) return;
@@ -805,6 +838,42 @@
                 msgDiv.textContent = texto;
                 chatMessages.appendChild(msgDiv);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function adicionarSugestoes() {
+                suggestionsDiv.innerHTML = '';
+                frasesAutomaticas.forEach(frase => {
+                    const chip = document.createElement('span');
+                    chip.classList.add('suggestion-chip');
+                    chip.textContent = frase;
+                    chip.addEventListener('click', function() {
+                        chatInput.value = frase;
+                        enviarMensagem();
+                    });
+                    suggestionsDiv.appendChild(chip);
+                });
+            }
+
+            function toggleChat() {
+                if (!chatWidget) return;
+                if (chatWidget.style.display === 'flex') {
+                    chatWidget.style.display = 'none';
+                } else {
+                    chatWidget.style.display = 'flex';
+                    if (chatMessages.children.length === 0) {
+                        adicionarMensagem('bot', 'Olá! Sou o assistente virtual da Cara do Pedro. Como posso ajudar você hoje?');
+                    }
+                    adicionarSugestoes();
+                    chatInput.focus();
+                }
+            }
+
+            if (chatButton) {
+                chatButton.addEventListener('click', toggleChat);
+            }
+
+            if (closeChatBtn) {
+                closeChatBtn.addEventListener('click', toggleChat);
             }
 
             const baseDeConhecimento = [
@@ -865,6 +934,30 @@
                     resposta: 'Ofereço serviços de informática (formatação, upgrade, redes, criação de sites), limpeza de terrenos, organização de espaços e bem-estar animal (passeio e recreação). Qual deles te interessa?'
                 },
                 {
+                    palavras: ['pedreiro', 'ajudante', 'obra', 'construção'],
+                    resposta: 'Ofereço serviços de ajudante de pedreiro para apoio em obras e construções. Mão de obra qualificada e comprometida. Entre em contato para mais informações.'
+                },
+                {
+                    palavras: ['elétrico', 'eletricista', 'fiação', 'tomada'],
+                    resposta: 'Presto apoio em serviços elétricos básicos, como instalação de tomadas, interruptores e reparos simples. Segurança e qualidade no trabalho.'
+                },
+                {
+                    palavras: ['pintura', 'pintar', 'parede', 'residencial', 'comercial'],
+                    resposta: 'Realizo pintura residencial e comercial com qualidade e acabamento perfeito. Solicite um orçamento sem compromisso.'
+                },
+                {
+                    palavras: ['montagem', 'móveis', 'marcenaria'],
+                    resposta: 'Ofereço serviços de montagem de móveis e serviços básicos de marcenaria. Agilidade e cuidado com seus móveis.'
+                },
+                {
+                    palavras: ['stand', 'evento', 'montagem stand', 'desmontagem'],
+                    resposta: 'Presto serviços de montagem e desmontagem de stands para eventos. Equipe experiente e organizada.'
+                },
+                {
+                    palavras: ['estoque', 'organização', 'espaço comercial'],
+                    resposta: 'Realizo organização de estoque e espaços comerciais, otimizando seu ambiente de trabalho.'
+                },
+                {
                     palavras: ['obrigado', 'valeu', 'ajudou', 'ótimo', 'excelente'],
                     resposta: 'Fico feliz em ajudar! Se precisar de mais alguma coisa, é só chamar. Estou aqui para isso. 😊'
                 },
@@ -885,7 +978,7 @@
                     }
                 }
                 
-                return 'Desculpe, não entendi completamente. Posso ajudar com informações sobre:\n\n• Formatação e sistemas (Windows/Linux)\n• Configuração de redes\n• Limpeza de terrenos\n• Passeio com animais\n• Projeto Lar Sem Fronteiras\n• Doações via PIX\n\nMe fale mais sobre o que você precisa!';
+                return 'Desculpe, não entendi completamente. Posso ajudar com informações sobre:\n\n• Tecnologia (formatação, redes, sites)\n• Mão de obra operacional (eventos, limpeza)\n• Obra e manutenção (pedreiro, pintura)\n• Serviços complementares (passeio com animais)\n• Projeto Lar Sem Fronteiras\n• Doações via PIX\n\nMe fale mais sobre o que você precisa!';
             }
 
             function enviarMensagem() {
@@ -898,6 +991,7 @@
                 setTimeout(() => {
                     const resposta = processarMensagem(msg);
                     adicionarMensagem('bot', resposta);
+                    adicionarSugestoes();
                 }, 500);
             }
 
