@@ -1,0 +1,11 @@
+media:
+  - name: "Imagens do Site"
+    label: "Imagens"
+    folder: "imagens"
+    create: true
+    accept:
+      - "image/png"
+      - "image/jpeg"
+      - "image/jpg"
+      - "image/gif"
+      - "image/webp"
