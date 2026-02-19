@@ -1,11 +1,23 @@
+site: A Cara do Pedro
+description: Soluções técnicas com propósito
+url: https://ghostspzl13.github.io/acaradopedro
+
 media:
-  - name: "Imagens do Site"
-    label: "Imagens"
-    folder: "imagens"
+  imagens:
+    folder: /imagens
     create: true
     accept:
-      - "image/png"
-      - "image/jpeg"
-      - "image/jpg"
-      - "image/gif"
-      - "image/webp"
+      - .png
+      - .jpg
+      - .jpeg
+      - .gif
+
+collections:
+  posts:
+    output: true
+    folder: _posts
+    fields:
+      - { name: title, label: Título, type: string }
+      - { name: date, label: Data, type: date }
+      - { name: image, label: Imagem, type: image }
+      - { name: content, label: Conteúdo, type: text }
