@@ -1,4 +1,4 @@
-```html
+ ```html
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -38,6 +38,7 @@
             text-align: center;
             padding: 2.5rem 1rem;
             border-bottom: 3px solid #00e676;
+            position: relative;
         }
 
         h1 {
@@ -51,27 +52,168 @@
             margin: 0.75rem 0 1.5rem;
         }
 
-        nav {
+        /* MENU HAMBURGER */
+        .menu-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: #00e676;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 10001;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 0.5rem 1rem;
-            margin-top: 0.5rem;
+            gap: 5px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: all 0.3s;
         }
 
-        nav a {
+        .menu-toggle:hover {
+            transform: scale(1.1);
+            background: #00c853;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 24px;
+            height: 3px;
+            background: #0a0a0a;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* SIDEBAR NAVIGATION */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            border-right: 2px solid #00e676;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-header {
+            padding: 2rem 1.5rem 1rem;
+            border-bottom: 1px solid #333;
+            text-align: center;
+        }
+
+        .sidebar-header h3 {
             color: #00e676;
-            text-decoration: none;
-            font-weight: 600;
-            padding: 0.25rem 0.5rem;
-            border-radius: 20px;
-            transition: background-color 0.2s, color 0.2s;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
         }
 
-        nav a:hover {
-            background-color: #00e676;
-            color: #0a0a0a;
+        .sidebar-header p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-nav {
+            padding: 1rem 0;
+        }
+
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: white;
             text-decoration: none;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            background: rgba(0, 230, 118, 0.1);
+            color: #00e676;
+            border-left-color: #00e676;
+            padding-left: 2rem;
+        }
+
+        .sidebar-nav a::before {
+            content: "→";
+            color: #00e676;
+            font-size: 1.2rem;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* NAV DESKTOP (escondido em mobile) */
+        nav.desktop-nav {
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            nav.desktop-nav {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem 1rem;
+                margin-top: 0.5rem;
+            }
+
+            nav.desktop-nav a {
+                color: #00e676;
+                text-decoration: none;
+                font-weight: 600;
+                padding: 0.25rem 0.5rem;
+                border-radius: 20px;
+                transition: background-color 0.2s, color 0.2s;
+            }
+
+            nav.desktop-nav a:hover {
+                background-color: #00e676;
+                color: #0a0a0a;
+                text-decoration: none;
+            }
+
+            .menu-toggle {
+                display: none;
+            }
         }
 
         section {
@@ -394,7 +536,8 @@
         #chatAI-header button:focus-visible,
         #chatSend:focus-visible,
         .botao-doar:focus-visible,
-        nav a:focus-visible {
+        nav a:focus-visible,
+        .menu-toggle:focus-visible {
             outline: 3px solid #00e676;
             outline-offset: 3px;
         }
@@ -417,15 +560,48 @@
                 right: 0.75rem;
                 padding: 0.6rem 1rem;
             }
+
+            .sidebar {
+                width: 260px;
+                left: -280px;
+            }
         }
     </style>
 </head>
 
 <body>
+    <!-- BOTÃO HAMBURGER -->
+    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Abrir menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Menu</h3>
+            <p>A Cara do Pedro</p>
+        </div>
+        <nav class="sidebar-nav" aria-label="Navegação mobile">
+            <a href="#sobre" onclick="closeSidebar()">Sobre</a>
+            <a href="#historia" onclick="closeSidebar()">Minha História</a>
+            <a href="#confianca" onclick="closeSidebar()">Por que confiar?</a>
+            <a href="#servicos" onclick="closeSidebar()">Serviços</a>
+            <a href="#experiencia" onclick="closeSidebar()">Experiência</a>
+            <a href="#projeto" onclick="closeSidebar()">Projeto</a>
+            <a href="#contato" onclick="closeSidebar()">Contato</a>
+            <a href="#doacao" onclick="closeSidebar()">Doação</a>
+        </nav>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
     <header>
         <h1>A Cara do Pedro</h1>
         <p>Soluções técnicas com execução de quem já construiu no mundo real.</p>
-        <nav aria-label="Principal">
+        <nav class="desktop-nav" aria-label="Principal">
             <a href="#sobre">Sobre</a>
             <a href="#confianca">Confiança</a>
             <a href="#servicos">Serviços</a>
@@ -500,9 +676,9 @@
 
         <section id="contato">
             <h2>Contato</h2>
-            <p>WhatsApp: <a href="https://wa.me/5511977487454" target="_blank" rel="noopener noreferrer">Clique aqui</a></p>
+            <p>WhatsApp: <a href="https://wa.me/5511977487454 " target="_blank" rel="noopener noreferrer">Clique aqui</a></p>
             <p>Email: <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a></p>
-            <p>Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank" rel="noopener noreferrer">@pedro.pedr00</a></p>
+            <p>Instagram: <a href="https://instagram.com/pedro.pedr00 " target="_blank" rel="noopener noreferrer">@pedro.pedr00</a></p>
         </section>
 
         <section id="doacao">
@@ -517,7 +693,7 @@
         <p>© 2026 A Cara do Pedro – Todos os direitos reservados.</p>
     </footer>
 
-    <a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
+    <a class="whatsapp-float" href="https://wa.me/5511977487454?text=Ol á%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
         <span>WhatsApp</span>
     </a>
 
@@ -539,6 +715,34 @@
     <script>
         (function() {
             'use strict';
+
+            // SIDEBAR FUNCTIONS
+            window.toggleSidebar = function() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                const toggle = document.querySelector('.menu-toggle');
+                
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+                toggle.classList.toggle('active');
+            };
+
+            window.closeSidebar = function() {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebarOverlay');
+                const toggle = document.querySelector('.menu-toggle');
+                
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                toggle.classList.remove('active');
+            };
+
+            // Fechar sidebar ao redimensionar para desktop
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    closeSidebar();
+                }
+            });
 
             // BACKGROUND INTELIGENTE - HORÁRIO DE SÃO PAULO
             function atualizarBackground() {
