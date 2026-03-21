@@ -1,1023 +1,167 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Cara do Pedro | Tecnologia com Propósito</title>
-    <meta name="description" content="Soluções técnicas em tecnologia e idealizador do projeto Lar Sem Fronteiras. Atendimento em Itaquaquecetuba.">
-    <meta name="keywords" content="técnico em informática, manutenção de computador, Linux, Itaquaquecetuba, Lar Sem Fronteiras">
-    <meta name="author" content="Pedro">
-    <meta property="og:title" content="A Cara do Pedro | Tecnologia com Propósito">
-    <meta property="og:description" content="Soluções técnicas em informática e Linux em Itaquaquecetuba.">
-    <meta property="og:type" content="website">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
-            color: #1e1e1e;
-            scroll-behavior: smooth;
-            line-height: 1.5;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            transition: background-image 0.5s ease;
-        }
-
-        header {
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(5px);
-            color: white;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            border-bottom: 3px solid #00e676;
-            position: relative;
-        }
-
-        h1 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            letter-spacing: -0.02em;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin: 0.75rem 0 1.5rem;
-        }
-
-        .menu-toggle {
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            background: #00e676;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            z-index: 10001;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: all 0.3s;
-        }
-
-        .menu-toggle:hover {
-            transform: scale(1.1);
-            background: #00c853;
-        }
-
-        .menu-toggle span {
-            display: block;
-            width: 24px;
-            height: 3px;
-            background: #0a0a0a;
-            border-radius: 2px;
-            transition: all 0.3s;
-        }
-
-        .menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 280px;
-            height: 100vh;
-            background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            transition: left 0.3s ease;
-            overflow-y: auto;
-            border-right: 2px solid #00e676;
-        }
-
-        .sidebar.active {
-            left: 0;
-        }
-
-        .sidebar-header {
-            padding: 2rem 1.5rem 1rem;
-            border-bottom: 1px solid #333;
-            text-align: center;
-        }
-
-        .sidebar-header h3 {
-            color: #00e676;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .sidebar-header p {
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .sidebar-nav {
-            padding: 1rem 0;
-        }
-
-        .sidebar-nav a {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: white;
-            text-decoration: none;
-            padding: 1rem 1.5rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-nav a:hover {
-            background: rgba(0, 230, 118, 0.1);
-            color: #00e676;
-            border-left-color: #00e676;
-            padding-left: 2rem;
-        }
-
-        .sidebar-nav a::before {
-            content: "→";
-            color: #00e676;
-            font-size: 1.2rem;
-        }
-
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 9999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-
-        .sidebar-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        nav.desktop-nav {
-            display: none;
-        }
-
-        @media (min-width: 768px) {
-            nav.desktop-nav {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 0.5rem 1rem;
-                margin-top: 0.5rem;
-            }
-
-            nav.desktop-nav a {
-                color: #00e676;
-                text-decoration: none;
-                font-weight: 600;
-                padding: 0.25rem 0.5rem;
-                border-radius: 20px;
-                transition: background-color 0.2s, color 0.2s;
-            }
-
-            nav.desktop-nav a:hover {
-                background-color: #00e676;
-                color: #0a0a0a;
-                text-decoration: none;
-            }
-
-            .menu-toggle {
-                display: none;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-            
-            .sidebar-overlay {
-                display: none;
-            }
-        }
-
-        section {
-            padding: 3rem 1rem;
-            max-width: 75rem;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(4px);
-            border-radius: 20px;
-            margin-bottom: 2rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            font-size: 2rem;
-            border-left: 5px solid #00e676;
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        ul {
-            padding-left: 1.5rem;
-            list-style-type: none;
-        }
-
-        ul li {
-            margin-bottom: 0.5rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        ul li::before {
-            content: "✔";
-            color: #00e676;
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-        }
-
-        footer {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(5px);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.95rem;
-        }
-
-        .busca-servico input {
-            padding: 0.75rem 1rem;
-            width: 100%;
-            max-width: 25rem;
-            margin: 0.75rem 0;
-            border: 2px solid #ccc;
-            border-radius: 30px;
-            font-size: 1rem;
-        }
-
-        .busca-servico input:focus {
-            border-color: #00e676;
-            outline: none;
-        }
-
-        #resultadoBusca {
-            font-weight: 600;
-            color: #0a0a0a;
-            background: #e0ffe6;
-            padding: 0.75rem 1rem;
-            border-radius: 30px;
-            display: inline-block;
-        }
-
-        .whatsapp-float {
-            position: fixed;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            background-color: #25D366;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
-            z-index: 9998;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: transform 0.2s;
-        }
-
-        .whatsapp-float:hover {
-            transform: scale(1.05);
-            background-color: #20b859;
-        }
-
-        #doacao {
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(5px);
-            color: white;
-            text-align: center;
-            border-radius: 24px;
-            padding: 3rem 2rem;
-            margin: 2rem auto;
-        }
-
-        #doacao h2 {
-            border-left: none;
-            color: #00e676;
-        }
-
-        .botao-doar {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.9rem 2rem;
-            background: #00e676;
-            color: #0a0a0a;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 40px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-
-        .botao-doar:hover {
-            background-color: #00c853;
-            transform: scale(1.02);
-        }
-
-        .historia-container {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .historia-container img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #00e676;
-            background: #ccc;
-            display: block;
-        }
-
-        .historia-texto p {
-            margin-bottom: 1rem;
-        }
-
-        #contato a {
-            color: #0a0a0a;
-            font-weight: 600;
-            text-decoration: none;
-            border-bottom: 2px solid #00e676;
-        }
-
-        #contato a:hover {
-            color: #00e676;
-        }
-
-        #chatAI-widget {
-            position: fixed;
-            bottom: 6rem;
-            left: 1.5rem;
-            width: min(90vw, 22rem);
-            max-height: 70vh;
-            background: #ffffff;
-            color: #1e1e1e;
-            border-radius: 28px;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.3);
-            font-family: inherit;
-            z-index: 10000;
-            border: 1px solid rgba(0, 230, 118, 0.3);
-            transition: opacity 0.2s;
-        }
-
-        #chatAI-header {
-            padding: 1rem 1.2rem;
-            background: #0a0a0a;
-            color: white;
-            border-radius: 28px 28px 0 0;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #00e676;
-        }
-
-        #chatAI-header button {
-            background: none;
-            border: none;
-            color: #00e676;
-            font-size: 1.5rem;
-            line-height: 1;
-            cursor: pointer;
-            padding: 0 0.5rem;
-            border-radius: 50%;
-            width: 2rem;
-            height: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #chatAI-header button:hover {
-            background-color: #333;
-        }
-
-        #chatMessages {
-            flex: 1;
-            padding: 1.2rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            min-height: 200px;
-            max-height: 55vh;
-            background: #fafafa;
-        }
-
-        .message {
-            padding: 0.7rem 1.2rem;
-            border-radius: 24px;
-            max-width: 85%;
-            word-break: break-word;
-            line-height: 1.4;
-            animation: fadeIn 0.2s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message.user {
-            align-self: flex-end;
-            background: #00e676;
-            color: #0a0a0a;
-            font-weight: 500;
-            border-bottom-right-radius: 4px;
-        }
-
-        .message.bot {
-            align-self: flex-start;
-            background: #e9e9e9;
-            color: #1e1e1e;
-            border-bottom-left-radius: 4px;
-        }
-
-        .suggestions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            padding: 0.5rem 1.2rem;
-            background: #f0f0f0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .suggestion-chip {
-            background: white;
-            border: 1px solid #00e676;
-            color: #0a0a0a;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .suggestion-chip:hover {
-            background: #00e676;
-            color: #0a0a0a;
-        }
-
-        #chatInput-area {
-            display: flex;
-            padding: 0.8rem;
-            background: white;
-            border-radius: 0 0 28px 28px;
-            border-top: 1px solid #ddd;
-            gap: 0.5rem;
-        }
-
-        #chatInput {
-            flex: 1;
-            padding: 0.7rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 40px;
-            font-size: 1rem;
-            outline: none;
-        }
-
-        #chatInput:focus {
-            border-color: #00e676;
-        }
-
-        #chatSend {
-            background: #0a0a0a;
-            border: none;
-            color: #00e676;
-            font-weight: bold;
-            font-size: 1.2rem;
-            padding: 0 1rem;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-
-        #chatSend:hover {
-            background: #00e676;
-            color: #0a0a0a;
-        }
-
-        #chatButton {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            background: #0a0a0a;
-            border: 3px solid #00e676;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
-            z-index: 9999;
-            color: #00e676;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #chatButton:hover {
-            background: #00e676;
-            color: #0a0a0a;
-            transform: scale(1.05);
-        }
-
-        #chatButton:focus-visible,
-        #chatAI-header button:focus-visible,
-        #chatSend:focus-visible,
-        .botao-doar:focus-visible,
-        nav a:focus-visible,
-        .menu-toggle:focus-visible {
-            outline: 3px solid #00e676;
-            outline-offset: 3px;
-        }
-
-        @media (max-width: 767px) {
-            #chatAI-widget {
-                left: 0.75rem;
-                bottom: 5rem;
-                width: calc(100vw - 1.5rem);
-                max-height: 70vh;
-            }
-
-            #chatButton {
-                left: 0.75rem;
-                width: 60px;
-                height: 60px;
-            }
-
-            .whatsapp-float {
-                right: 0.75rem;
-                padding: 0.6rem 1rem;
-            }
-
-            .sidebar {
-                width: 260px;
-                left: -280px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Cara do Pedro | Orçamento Instantâneo</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial;
+    background:#0a0a0a;
+    color:white;
+}
+header {
+    text-align:center;
+    padding:2rem;
+    border-bottom:2px solid #00e676;
+}
+h1 { color:#00e676; }
+
+section {
+    padding:2rem;
+    max-width:900px;
+    margin:auto;
+}
+.card {
+    background:#111;
+    padding:1rem;
+    margin:1rem 0;
+    border-radius:10px;
+}
+.botao {
+    display:inline-block;
+    background:#00e676;
+    color:black;
+    padding:1rem;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:bold;
+    margin-top:1rem;
+}
+input, select {
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    border:none;
+}
+</style>
 </head>
 
 <body>
-    <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Abrir menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
 
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <h3>Menu</h3>
-            <p>A Cara do Pedro</p>
-        </div>
-        <nav class="sidebar-nav" aria-label="Navegação mobile">
-            <a href="#sobre" onclick="closeSidebar()">Sobre</a>
-            <a href="#historia" onclick="closeSidebar()">Minha História</a>
-            <a href="#confianca" onclick="closeSidebar()">Por que confiar?</a>
-            <a href="#servicos" onclick="closeSidebar()">Serviços</a>
-            <a href="#experiencia" onclick="closeSidebar()">Experiência</a>
-            <a href="#projeto" onclick="closeSidebar()">Projeto</a>
-            <a href="#contato" onclick="closeSidebar()">Contato</a>
-            <a href="#doacao" onclick="closeSidebar()">Doação</a>
-        </nav>
-    </div>
+<header>
+<h1>A Cara do Pedro</h1>
+<p>Orçamento rápido. Sem enrolação.</p>
+</header>
 
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+<section>
+<h2>💰 Orçamento Automático</h2>
 
-    <header>
-        <h1>A Cara do Pedro</h1>
-        <p>Soluções técnicas com execução de quem já construiu no mundo real.</p>
-        <nav class="desktop-nav" aria-label="Principal">
-            <a href="#sobre">Sobre</a>
-            <a href="#confianca">Confiança</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#experiencia">Experiência</a>
-            <a href="#projeto">Projeto</a>
-            <a href="#contato">Contato</a>
-            <a href="#doacao">Doação</a>
-            <a href="#historia">Minha História</a>
-        </nav>
-    </header>
+<label>Qual serviço você precisa?</label>
+<select id="servico">
+<option value="">Selecione</option>
+<option value="formatacao">Formatação de PC</option>
+<option value="virus">Remoção de vírus</option>
+<option value="rede">Configurar Wi-Fi</option>
+<option value="pintura">Pintura</option>
+<option value="limpeza">Limpeza de terreno</option>
+<option value="montagem">Montagem de móveis</option>
+<option value="obra">Ajudante de obra</option>
+<option value="site">Criação de site</option>
+<option value="suporte">Suporte técnico geral</option>
+</select>
 
-    <main>
-        <section id="sobre">
-            <h2>Sobre</h2>
-            <p>A Cara do Pedro é uma vitrine de soluções reais. Uno experiência prática, tecnologia e visão estratégica para resolver problemas de forma objetiva.</p>
-            <p>Atuo com manutenção, estruturação e otimização de computadores. Tecnologia funcional, atendimento direto e entrega com responsabilidade.</p>
-        </section>
+<label>Descreva o que você precisa</label>
+<input type="text" id="descricao" placeholder="Ex: computador lento, parede descascando...">
 
-        <section id="historia">
-            <h2>Minha História</h2>
-            <div class="historia-container">
-                <img src="imagens/minha-foto.jpg" alt="Foto de Pedro">
-                <div class="historia-texto">
-                    <p>Eu venho da prática. Aprendi cedo que resultado vem de execução. Trabalhei em eventos, montagem, logística e pressão real.</p>
-                    <p>A tecnologia entrou na minha vida como ferramenta de transformação. Não apenas como estudo, mas como solução concreta para gerar renda, autonomia e independência.</p>
-                    <p>Hoje construo projetos com propósito. Meu foco é crescer, estruturar e deixar legado.</p>
-                </div>
-            </div>
-        </section>
+<button class="botao" onclick="gerarOrcamento()">Gerar orçamento</button>
 
-        <section id="confianca">
-            <h2>Por que confiar em mim?</h2>
-            <ul>
-                <li>Experiência prática em grandes eventos</li>
-                <li>Trabalho sob pressão com foco em resultado</li>
-                <li>Organização e disciplina operacional</li>
-                <li>Atendimento direto e objetivo</li>
-                <li>Compromisso com prazo e qualidade</li>
-            </ul>
-        </section>
+<div id="resultado" class="card"></div>
 
-        <section id="servicos">
-            <h2>Serviços</h2>
-            <ul>
-                <li><strong>🔧 SERVIÇOS EM TECNOLOGIA</strong></li>
-                <li>Formatação e recuperação de sistemas</li>
-                <li>Instalação de Windows e Linux</li>
-                <li>Remoção de vírus e otimização de desempenho</li>
-                <li>Upgrade estratégico (SSD, memória, melhoria de performance)</li>
-                <li>Configuração de redes residenciais e comerciais</li>
-                <li>Criação de sites simples e institucionais</li>
-                <li style="margin-top: 0.8rem;"><strong>🏗 SERVIÇOS OPERACIONAIS E MÃO DE OBRA</strong></li>
-                <li>Montagem e desmontagem de stands para eventos</li>
-                <li>Equipe de apoio operacional para comércios e empresas</li>
-                <li>Profissionais à disposição durante horário contratado</li>
-                <li>Organização de estoque e espaços comerciais</li>
-                <li>Limpeza de terrenos</li>
-                <li>Organização e revitalização de ambientes</li>
-                <li style="margin-top: 0.8rem;"><strong>🧱 SERVIÇOS EM OBRA E MANUTENÇÃO</strong></li>
-                <li>Ajudante de pedreiro</li>
-                <li>Apoio em serviços elétricos</li>
-                <li>Pintura residencial e comercial</li>
-                <li>Montagem de móveis</li>
-                <li>Serviços básicos de marcenaria</li>
-                <li style="margin-top: 0.8rem;"><strong>🐾 SERVIÇOS COMPLEMENTARES</strong></li>
-                <li>Passeio e bem-estar para animais</li>
-            </ul>
-            <div class="busca-servico">
-                <label for="searchInput"><h3>Buscar Serviço</h3></label>
-                <input type="text" id="searchInput" placeholder="Ex: formatação, rede, limpeza..." aria-label="Campo de busca de serviços">
-                <p id="resultadoBusca" aria-live="polite"></p>
-            </div>
-        </section>
+<a id="whatsappBtn" class="botao" target="_blank" style="display:none;">Enviar no WhatsApp</a>
 
-        <section id="experiencia">
-            <h2>Experiência de Campo</h2>
-            <p>Trajetória construída na prática, atuando em montagens de eventos, logística e execução sob pressão.</p>
-        </section>
+</section>
 
-        <section id="projeto">
-            <h2>Projeto: Lar Sem Fronteiras</h2>
-            <p>Iniciativa social voltada à terceira idade, promovendo autonomia e dignidade.</p>
-            <a href="lar-sem-fronteiras.html" style="color:#00e676; font-weight:bold;">Conheça o projeto completo →</a>
-        </section>
+<script>
 
-        <section id="contato">
-            <h2>Contato</h2>
-            <p>WhatsApp: <a href="https://wa.me/5511977487454" target="_blank" rel="noopener noreferrer">Clique aqui</a></p>
-            <p>Email: <a href="mailto:pedro.098259@gmail.com">pedro.098259@gmail.com</a></p>
-            <p>Instagram: <a href="https://instagram.com/pedro.pedr00" target="_blank" rel="noopener noreferrer">@pedro.pedr00</a></p>
-        </section>
+function analisarTexto(texto){
+    texto = texto.toLowerCase();
 
-        <section id="doacao">
-            <h2>Ajude a manter o projeto vivo</h2>
-            <p>Este projeto é independente e movido por propósito. Se você acredita nessa missão e deseja contribuir, considere apoiar via PIX.</p>
-            <p><strong style="color:#00e676; font-size:1.5rem;">Chave PIX: 19 93300-4521</strong></p>
-            <a class="botao-doar" href="#contato">Quero apoiar o projeto</a>
-        </section>
-    </main>
+    if(texto.includes("lento") || texto.includes("travando")) return "formatacao";
+    if(texto.includes("virus")) return "virus";
+    if(texto.includes("internet") || texto.includes("wifi")) return "rede";
+    if(texto.includes("parede") || texto.includes("pintar")) return "pintura";
+    if(texto.includes("sujo") || texto.includes("mato")) return "limpeza";
+    if(texto.includes("móvel")) return "montagem";
 
-    <footer>
-        <p>© 2026 A Cara do Pedro – Todos os direitos reservados.</p>
-    </footer>
+    return null;
+}
 
-    <a class="whatsapp-float" href="https://wa.me/5511977487454?text=Olá%20Pedro,%20vi%20seu%20site%20e%20preciso%20de%20ajuda%20com..." target="_blank" rel="noopener noreferrer" aria-label="Conversar no WhatsApp">
-        <span>WhatsApp</span>
-    </a>
+function gerarOrcamento(){
 
-    <div id="chatAI-widget" role="dialog" aria-label="Janela de chat com assistente virtual">
-        <div id="chatAI-header">
-            <span>Assistente IA</span>
-            <button id="closeChatBtn" aria-label="Fechar chat">✕</button>
-        </div>
-        <div id="chatMessages" role="log" aria-live="polite"></div>
-        <div class="suggestions" id="suggestions"></div>
-        <div id="chatInput-area">
-            <input type="text" id="chatInput" placeholder="Digite sua mensagem..." aria-label="Mensagem para o assistente">
-            <button id="chatSend" aria-label="Enviar mensagem">→</button>
-        </div>
-    </div>
+    let servico = document.getElementById("servico").value;
+    let desc = document.getElementById("descricao").value;
 
-    <button id="chatButton" aria-label="Abrir chat">IA</button>
+    let detectado = analisarTexto(desc);
+    if(!servico && detectado) servico = detectado;
 
-    <script>
-        (function() {
-            'use strict';
+    let preco = "";
 
-            window.toggleSidebar = function() {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                const toggle = document.querySelector('.menu-toggle');
-                
-                sidebar.classList.toggle('active');
-                overlay.classList.toggle('active');
-                toggle.classList.toggle('active');
-            };
+    switch(servico){
+        case "formatacao":
+            preco = "R$80 a R$150";
+            break;
+        case "virus":
+            preco = "R$70 a R$120";
+            break;
+        case "rede":
+            preco = "R$80 a R$200";
+            break;
+        case "pintura":
+            preco = "R$150+";
+            break;
+        case "limpeza":
+            preco = "R$100+";
+            break;
+        case "montagem":
+            preco = "R$80+";
+            break;
+        case "obra":
+            preco = "Diária R$120";
+            break;
+        case "site":
+            preco = "R$200 a R$600";
+            break;
+        case "suporte":
+            preco = "R$50 a R$100";
+            break;
+        default:
+            preco = "Sob avaliação";
+    }
 
-            window.closeSidebar = function() {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                const toggle = document.querySelector('.menu-toggle');
-                
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
-                toggle.classList.remove('active');
-            };
+    let resultado = `
+    Serviço: ${servico || "Não identificado"}<br>
+    Estimativa: ${preco}<br>
+    Descrição: ${desc}
+    `;
 
-            window.addEventListener('resize', function() {
-                if (window.innerWidth >= 768) {
-                    closeSidebar();
-                }
-            });
+    document.getElementById("resultado").innerHTML = resultado;
 
-            function atualizarBackground() {
-                const agora = new Date();
-                const options = { timeZone: 'America/Sao_Paulo', hour: 'numeric', hour12: false };
-                const horaSP = parseInt(agora.toLocaleString('pt-BR', options));
-                
-                let backgroundImage;
-                if (horaSP >= 6 && horaSP < 18) {
-                    backgroundImage = "url('imagens/spdia.png')";
-                } else {
-                    backgroundImage = "url('imagens/spnoite.png')";
-                }
-                
-                document.body.style.backgroundImage = backgroundImage;
-            }
-            
-            atualizarBackground();
-            setInterval(atualizarBackground, 60000);
+    let msg = encodeURIComponent(
+        `Olá Pedro, quero esse serviço:\n\n${resultado}`
+    );
 
-            const servicosLista = [
-                "formatacao", "formatação", "recuperacao", "linux", "windows", "virus", "upgrade", "rede", "site",
-                "limpeza", "terreno", "passeio", "animal", "organização", "espaços", "pedreiro", "elétrico", "pintura", "montagem", "marcenaria", "stand", "estoque", "revitalização"
-            ];
+    let link = "https://wa.me/5511977487454?text=" + msg;
 
-            const searchInput = document.getElementById('searchInput');
-            const resultadoBusca = document.getElementById('resultadoBusca');
+    let btn = document.getElementById("whatsappBtn");
+    btn.href = link;
+    btn.style.display = "inline-block";
+}
 
-            function buscarServico() {
-                const termo = searchInput.value.trim().toLowerCase();
-                if (!termo) {
-                    resultadoBusca.textContent = '';
-                    return;
-                }
-                const encontrado = servicosLista.some(s => termo.includes(s));
-                resultadoBusca.textContent = encontrado
-                    ? '✅ Sim, esse serviço está disponível. Vamos conversar!'
-                    : '🔍 Não encontrei exatamente, mas podemos avaliar. Me chame no WhatsApp.';
-            }
+</script>
 
-            if (searchInput) {
-                searchInput.addEventListener('input', buscarServico);
-            }
-
-            const chatWidget = document.getElementById('chatAI-widget');
-            const chatMessages = document.getElementById('chatMessages');
-            const chatInput = document.getElementById('chatInput');
-            const chatSend = document.getElementById('chatSend');
-            const chatButton = document.getElementById('chatButton');
-            const closeChatBtn = document.getElementById('closeChatBtn');
-            const suggestionsDiv = document.getElementById('suggestions');
-
-            const frasesAutomaticas = [
-                "Olá, como posso ajudar você hoje?",
-                "Você pode perguntar sobre meus serviços.",
-                "Deseja orçamento?",
-                "Precisa de suporte técnico ou mão de obra?",
-                "Estou pronto para atender você."
-            ];
-
-            function adicionarMensagem(remetente, texto) {
-                if (!texto.trim()) return;
-                const msgDiv = document.createElement('div');
-                msgDiv.classList.add('message', remetente);
-                msgDiv.textContent = texto;
-                chatMessages.appendChild(msgDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            }
-
-            function adicionarSugestoes() {
-                suggestionsDiv.innerHTML = '';
-                frasesAutomaticas.forEach(frase => {
-                    const chip = document.createElement('span');
-                    chip.classList.add('suggestion-chip');
-                    chip.textContent = frase;
-                    chip.addEventListener('click', function() {
-                        chatInput.value = frase;
-                        enviarMensagem();
-                    });
-                    suggestionsDiv.appendChild(chip);
-                });
-            }
-
-            function toggleChat() {
-                if (!chatWidget) return;
-                if (chatWidget.style.display === 'flex') {
-                    chatWidget.style.display = 'none';
-                } else {
-                    chatWidget.style.display = 'flex';
-                    if (chatMessages.children.length === 0) {
-                        adicionarMensagem('bot', 'Olá! Sou o assistente virtual da Cara do Pedro. Como posso ajudar você hoje?');
-                    }
-                    adicionarSugestoes();
-                    chatInput.focus();
-                }
-            }
-
-            if (chatButton) {
-                chatButton.addEventListener('click', toggleChat);
-            }
-
-            if (closeChatBtn) {
-                closeChatBtn.addEventListener('click', toggleChat);
-            }
-
-            const baseDeConhecimento = [
-                {
-                    palavras: ['oi', 'olá', 'boa tarde', 'bom dia', 'boa noite', 'começar', 'iniciar'],
-                    resposta: 'Olá! Bem-vindo à Cara do Pedro. Sou seu assistente virtual. Posso ajudar com informações sobre serviços técnicos, projetos sociais, horários de atendimento, formas de contato ou doações. O que você precisa?'
-                },
-                {
-                    palavras: ['formatação', 'formatar', 'windows', 'linux', 'sistema operacional', 'instalar', 'virus', 'recuperação'],
-                    resposta: 'Ofereço serviços completos de formatação, instalação de Windows e Linux, remoção de vírus e recuperação de dados. Faço atendimento em Itaquaquecetuba e região. Posso te passar mais detalhes pelo WhatsApp?'
-                },
-                {
-                    palavras: ['rede', 'wifi', 'internet', 'configurar', 'roteador', 'conexão'],
-                    resposta: 'Realizo configuração de redes domésticas e empresariais, incluindo instalação de roteadores, repetidores e solução de problemas de conexão. Quer agendar uma visita técnica?'
-                },
-                {
-                    palavras: ['upgrade', 'memória', 'ssd', 'hd', 'processador', 'melhorar', 'velocidade'],
-                    resposta: 'Faço upgrade estratégico de hardware para melhorar o desempenho do seu computador. Analiso suas necessidades e recomendo as melhores peças com melhor custo-benefício.'
-                },
-                {
-                    palavras: ['site', 'criação', 'desenvolvimento', 'página', 'landing page'],
-                    resposta: 'Crio sites simples e profissionais para pequenos negócios, portfólios e landing pages. Trabalho com HTML5, CSS3 e JavaScript puro. Entre em contato para conversarmos sobre seu projeto!'
-                },
-                {
-                    palavras: ['limpeza', 'terreno', 'jardim', 'espaço', 'organização', 'jardinagem'],
-                    resposta: 'Ofereço serviços de limpeza e organização de terrenos, espaços comerciais e residenciais. Atendo com responsabilidade e preço justo. Posso fazer um orçamento sem compromisso.'
-                },
-                {
-                    palavras: ['passeio', 'animal', 'cachorro', 'pet', 'bem-estar', 'animais'],
-                    resposta: 'Cuido do bem-estar do seu pet com serviços de passeio, recreação e acompanhamento. Seu animal recebe atenção, carinho e exercício com segurança.'
-                },
-                {
-                    palavras: ['horário', 'atendimento', 'funcionamento', 'aberto', 'dias'],
-                    resposta: 'Meu horário de atendimento é de segunda a sexta-feira, das 8h às 18h, e aos sábados das 8h às 12h. Fora desse horário, você pode deixar sua mensagem que retorno assim que possível.'
-                },
-                {
-                    palavras: ['contato', 'telefone', 'whatsapp', 'email', 'instagram', 'falar', 'comunicar'],
-                    resposta: 'Você pode falar comigo pelos seguintes canais:\n📱 WhatsApp: (11) 97748-7454\n📧 Email: pedro.098259@gmail.com\n📷 Instagram: @pedro.pedr00\nFique à vontade para me chamar!'
-                },
-                {
-                    palavras: ['valor', 'preço', 'custo', 'orçamento', 'quanto custa', 'investimento'],
-                    resposta: 'Os valores variam conforme o serviço e a complexidade. Me envie uma mensagem no WhatsApp com detalhes do que precisa para eu preparar um orçamento personalizado e justo para você.'
-                },
-                {
-                    palavras: ['pix', 'doação', 'apoiar', 'contribuir', 'ajudar', 'projeto', 'lar sem fronteiras'],
-                    resposta: 'Que bom que você quer apoiar! O Lar Sem Fronteiras é meu projeto social para terceira idade. A chave PIX para doações é: 19 93300-4521. Toda contribuição ajuda a manter esse sonho vivo. Gratidão!'
-                },
-                {
-                    palavras: ['lar sem fronteiras', 'projeto social', 'idoso', 'terceira idade', 'asilo'],
-                    resposta: 'Lar Sem Fronteiras é um projeto social que desenvolvo para promover autonomia e dignidade à terceira idade. Ofereço suporte técnico, visitas e ações sociais. Leia mais sobre na seção "Projeto" do site.'
-                },
-                {
-                    palavras: ['sobre', 'quem é', 'pedro', 'história', 'trajetória'],
-                    resposta: 'Pedro é um profissional com experiência prática em tecnologia, eventos, logística e soluções reais. Começou cedo, trabalhou sob pressão e hoje usa a tecnologia como ferramenta de transformação social. Conheça mais na seção "Minha História".'
-                },
-                {
-                    palavras: ['serviço', 'serviços', 'oferece', 'faz', 'trabalha', 'disponível'],
-                    resposta: 'Ofereço serviços de informática (formatação, upgrade, redes, criação de sites), limpeza de terrenos, organização de espaços e bem-estar animal (passeio e recreação). Qual deles te interessa?'
-                },
-                {
-                    palavras: ['pedreiro', 'ajudante', 'obra', 'construção'],
-                    resposta: 'Ofereço serviços de ajudante de pedreiro para apoio em obras e construções. Mão de obra qualificada e comprometida. Entre em contato para mais informações.'
-                },
-                {
-                    palavras: ['elétrico', 'eletricista', 'fiação', 'tomada'],
-                    resposta: 'Presto apoio em serviços elétricos básicos, como instalação de tomadas, interruptores e reparos simples. Segurança e qualidade no trabalho.'
-                },
-                {
-                    palavras: ['pintura', 'pintar', 'parede', 'residencial', 'comercial'],
-                    resposta: 'Realizo pintura residencial e comercial com qualidade e acabamento perfeito. Solicite um orçamento sem compromisso.'
-                },
-                {
-                    palavras: ['montagem', 'móveis', 'marcenaria'],
-                    resposta: 'Ofereço serviços de montagem de móveis e serviços básicos de marcenaria. Agilidade e cuidado com seus móveis.'
-                },
-                {
-                    palavras: ['stand', 'evento', 'montagem stand', 'desmontagem'],
-                    resposta: 'Presto serviços de montagem e desmontagem de stands para eventos. Equipe experiente e organizada.'
-                },
-                {
-                    palavras: ['estoque', 'organização', 'espaço comercial'],
-                    resposta: 'Realizo organização de estoque e espaços comerciais, otimizando seu ambiente de trabalho.'
-                },
-                {
-                    palavras: ['obrigado', 'valeu', 'ajudou', 'ótimo', 'excelente'],
-                    resposta: 'Fico feliz em ajudar! Se precisar de mais alguma coisa, é só chamar. Estou aqui para isso. 😊'
-                },
-                {
-                    palavras: ['tchau', 'até mais', 'encerrar', 'sair', 'finalizar'],
-                    resposta: 'Obrigado pela conversa! Se surgir alguma dúvida, é só abrir o chat novamente. Tenha um ótimo dia!'
-                }
-            ];
-
-            function processarMensagem(texto) {
-                const lower = texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                
-                for (let item of baseDeConhecimento) {
-                    for (let palavra of item.palavras) {
-                        if (lower.includes(palavra)) {
-                            return item.resposta;
-                        }
-                    }
-                }
-                
-                return 'Desculpe, não entendi completamente. Posso ajudar com informações sobre:\n\n• Tecnologia (formatação, redes, sites)\n• Mão de obra operacional (eventos, limpeza)\n• Obra e manutenção (pedreiro, pintura)\n• Serviços complementares (passeio com animais)\n• Projeto Lar Sem Fronteiras\n• Doações via PIX\n\nMe fale mais sobre o que você precisa!';
-            }
-
-            function enviarMensagem() {
-                const msg = chatInput.value.trim();
-                if (!msg) return;
-
-                adicionarMensagem('user', msg);
-                chatInput.value = '';
-
-                setTimeout(() => {
-                    const resposta = processarMensagem(msg);
-                    adicionarMensagem('bot', resposta);
-                    adicionarSugestoes();
-                }, 500);
-            }
-
-            if (chatSend) {
-                chatSend.addEventListener('click', enviarMensagem);
-            }
-
-            if (chatInput) {
-                chatInput.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        enviarMensagem();
-                    }
-                });
-            }
-
-            if (chatWidget) chatWidget.style.display = 'none';
-        })();
-    </script>
 </body>
 </html>
